@@ -45,6 +45,7 @@ const Navbar = () => {
                         </div>
 
                         {/* Search and Cart icons for larger screens */}
+                        
                         <div className="hidden lg:flex items-center gap-10">
                             {isSearchOpen ? (
                                 <div className="relative" ref={searchRef}>
@@ -70,7 +71,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile menu content */}
-                <div className={isOpen ? 'menu-visible' : 'menu-hidden'} style={{ backgroundColor: 'white' }}>
+                <div className={isOpen ? 'menu-visible' : 'menu-hidden'} style={{ backgroundColor: '#F8F7F1' }}>
                     {/* Mobile navigation links */}
                     <div className="px-2 pt-2 pb-3 space-y-1 text-center">
                         <Link to='/' className="block px-3 py-2 rounded-md text-base font-medium">Home</Link>
