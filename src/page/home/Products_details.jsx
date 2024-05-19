@@ -67,11 +67,27 @@ const Products_details = () => {
     };
 
     const handleReviewSubmit = () => {
+        // Basic validation checks
+        if (!newReview.name.trim() || !newReview.email.trim() || !newReview.review.trim()) {
+            toast.error("Please fill out all fields");
+            return;
+        }
+    
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(newReview.email)) {
+            toast.error("Please enter a valid email address");
+            return;
+        }
+    
+        // If all checks pass, proceed with review submission
         const updatedReviews = [...reviews, newReview];
         setReviews(updatedReviews);
         localStorage.setItem(`reviews-${id}`, JSON.stringify(updatedReviews));
         setNewReview({ name: '', email: '', review: '', date: new Date().toLocaleDateString() });
+        toast.success("Review submitted successfully");
     };
+    
 
     if (loading) {
         return <p>Loading...</p>;
