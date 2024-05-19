@@ -8,6 +8,8 @@ import sectionImg from '../assets/section-2-1.png';
 import sectionImg2 from '../assets/section-2-.png';
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Our_service from './home/Our_service';
+import Farming from './home/Farming';
+import Latest_products from './home/Latest_products';
 
 const Home = () => {
     return (
@@ -98,6 +100,8 @@ const Home = () => {
                 </div>
             </div>
             <Our_service></Our_service>
+            {/* <Farming></Farming> */}
+            <Latest_products />
         </div>
     );
 };
