@@ -176,18 +176,16 @@ const Products_details = () => {
 
                 <div className='mt-20'>
                     <p className='text-xl font-bold font-monrope '>{product.review} review for {product.product_name}</p>
-                    {reviews.slice(0, 15).map((review, index) => (
-                        <div key={index} className='mt-10 flex items-center gap-10'>
+                    <div  className='mt-10 flex items-center gap-10'>
                             <div className='w-24 h-24 overflow-hidden rounded-full'>
                                 <img className='w-full h-full object-cover' src={product.review_image} alt="" />
                             </div>
                             <div>
-                                <h1 className='text-xl font-semibold mb-2'>{review.name}</h1>
-                                <h1 className='text-sm text-[#4BAF47] mb-2 font-semibold'>{review.date}</h1>
-                                <p className='text-[#878680] font-sans'>{review.review}</p>
+                                <h1 className='text-xl font-semibold mb-2'>{product.review_name}</h1>
+                                <h1 className='text-sm text-[#4BAF47] mb-2 font-semibold'>{product.date}</h1>
+                                <p className='text-[#878680] font-sans'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid odio deleniti, debitis ad nam repellat accusantium voluptate porro laboriosam! Sed.</p>
                             </div>
                         </div>
-                    ))}
                     <hr className='my-10' />
                 </div>
 

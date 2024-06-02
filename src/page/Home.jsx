@@ -10,8 +10,11 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import Our_service from './home/Our_service';
 import Farming from './home/Farming';
 import Latest_products from './home/Latest_products';
+import { FaArrowRight } from 'react-icons/fa';
+import { Button } from '@mui/material';
 
 const Home = () => {
+
     return (
         <div>
             <div style={{ backgroundImage: `url(${bg})` }}
@@ -22,7 +25,17 @@ const Home = () => {
                     <p className='mt-5 text-gray-300'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br /> Ut elit tellus,
                         luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
                     <div className='mt-10 flex items-center gap-6'>
-                        <button className='px-6 py-3 bg-[#4BAF47] rounded hover:bg-[#6cd469] transform duration-300'>Discover More</button>
+                        <Button
+                            variant="contained"
+                            endIcon={<FaArrowRight />}
+                            color="success"
+                            loading
+                            sx={{
+                                padding: '12px 15px', borderRadius: '5px', backgroundColor: '#4BAF47', color: 'white', '&:hover': { backgroundColor: '#6cd469' }
+                            }}
+                        >
+                            Discover More
+                        </Button>
                         <motion.img
                             src={logo}
                             initial={{ opacity: 0 }}
@@ -100,7 +113,7 @@ const Home = () => {
                 </div>
             </div>
             <Our_service></Our_service>
-            {/* <Farming></Farming> */}
+            <Farming></Farming>
             <Latest_products />
         </div>
     );

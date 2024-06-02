@@ -3,25 +3,26 @@ import { FaFacebook, FaInstagramSquare, FaPinterest, FaTwitter } from 'react-ico
 import call from '../../assets/call.png';
 import icon from '../../assets/Icon.png';
 import location from '../../assets/Vector.png';
+import { Link } from 'react-router-dom';
 
 const Submenu = () => {
     return (
         <div className="hidden lg:block">
             <div className='max-w-screen-xl mx-auto py-5 px-5 md:px-5 lg:px-5 xl:px-0'>
                 <div className='flex justify-between items-center gap-5'>
-                    <img className='md:w-36' src={logo} alt="" />
+                   <Link to='/'> <img className='md:w-36' src={logo} alt="" /></Link>
                     <div className='flex justify-between items-center gap-9'>
                         <div className='flex items-center gap-2'>
-                            <div className="bg-[#F8F7F0] p-2 rounded-full text-2xl transform transition duration-300 hover:scale-110">
+                            <div className="bg-[#F8F7F0] hover:bg-green-100 p-2 rounded-full text-2xl transform transition duration-300 hover:scale-110">
                                 <FaFacebook />
                             </div>
-                            <div className="bg-[#F8F7F0] p-2 rounded-full text-2xl transform transition duration-300 hover:scale-110">
+                            <div className="bg-[#F8F7F0] hover:bg-green-100 p-2 rounded-full text-2xl transform transition duration-300 hover:scale-110">
                                 <FaInstagramSquare />
                             </div>
-                            <div className="bg-[#F8F7F0] p-2 rounded-full text-2xl transform transition duration-300 hover:scale-110">
+                            <div className="bg-[#F8F7F0] hover:bg-green-100 p-2 rounded-full text-2xl transform transition duration-300 hover:scale-110">
                                 <FaTwitter />
                             </div>
-                            <div className="bg-[#F8F7F0] p-2 rounded-full text-2xl transform transition duration-300 hover:scale-110">
+                            <div className="bg-[#F8F7F0] hover:bg-green-100 p-2 rounded-full text-2xl transform transition duration-300 hover:scale-110">
                                 <FaPinterest />
                             </div>
                         </div>
