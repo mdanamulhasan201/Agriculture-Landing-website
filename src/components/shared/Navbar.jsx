@@ -205,7 +205,7 @@ const Navbar = () => {
                         transform: 'translate(-50%, -50%)',
                         width: 800,
                         bgcolor: 'background.paper',
-                        border: '2px solid #000',
+                        // border: '2px solid #000',
                         boxShadow: 24,
                         p: 4,
                         transition: 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out',
@@ -295,11 +295,11 @@ const Navbar = () => {
                                 </TableBody>
                             </Table>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                                <Button variant="contained" color="success" onClick={handleCartModalClose}>
+                                <Button variant="contained" color="success">
                                     View Full cart
                                 </Button>
                                 <Button variant="contained" color="secondary" onClick={() => console.log('Checkout button clicked')}>
-                                    Process to   Checkout
+                                    Process to Checkout
                                 </Button>
                             </Box>
                         </Typography>
@@ -326,7 +326,7 @@ const Navbar = () => {
                         transform: 'translate(-50%, -50%)',
                         width: 800,
                         bgcolor: 'background.paper',
-                        border: '2px solid #000',
+                        // border: '2px solid #000',
                         boxShadow: 24,
                         p: 4,
                         transition: 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out',
@@ -417,11 +417,11 @@ const Navbar = () => {
                                 </TableBody>
                             </Table>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                                <Button variant="contained" color="success" onClick={handleCartModalClose}>
+                                <Button variant="contained" color="success">
                                     View Wishlist
                                 </Button>
                                 <Button variant="contained" color="secondary" onClick={() => console.log('Checkout button clicked')}>
-                                    Checkout
+                                    Process to Checkout
                                 </Button>
                             </Box>
                         </Typography>
