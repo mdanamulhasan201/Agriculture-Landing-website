@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TbCurrencyTaka } from "react-icons/tb";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../features/cartSlice';
 
 const LatestProducts = () => {
     const [products, setProducts] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -25,6 +28,7 @@ const LatestProducts = () => {
     }, []);
 
     const handleAddToCart = (product) => {
+        dispatch(addToCart(product));
         toast.success(`Added ${product.product_name} to cart!`);
     };
 

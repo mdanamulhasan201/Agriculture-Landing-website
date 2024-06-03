@@ -16,6 +16,8 @@ import AddIcon from '@mui/icons-material/Add';
 import MenuLoginIcon from './menuLoginIcon';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart, deleteFromCart } from '../../features/cartSlice';
 
 
 const Navbar = () => {
@@ -26,16 +28,40 @@ const Navbar = () => {
     const [favoriteModalOpen, setFavoriteModalOpen] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [searchModalOpen, setSearchModalOpen] = useState(false);
+    const [anchorElServices, setAnchorElServices] = useState(null);
+    const [anchorElProducts, setAnchorElProducts] = useState(null);
+    const cartItems = useSelector((state) => state.cart.items);
+    const dispatch = useDispatch();
 
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleIncrease = (item) => {
+        dispatch(addToCart(item));
     };
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
+    const handleDecrease = (item) => {
+        dispatch(removeFromCart(item));
     };
+
+    const handleRemoveFromCart = (id) => {
+        dispatch(deleteFromCart({ id }));
+    };
+
+    const handleMenuOpen = (event, menu) => {
+        if (menu === 'services') {
+            setAnchorElServices(event.currentTarget);
+        } else if (menu === 'products') {
+            setAnchorElProducts(event.currentTarget);
+        }
+    };
+
+    const handleMenuClose = (menu) => {
+        if (menu === 'services') {
+            setAnchorElServices(null);
+        } else if (menu === 'products') {
+            setAnchorElProducts(null);
+        }
+    };
+
+
 
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
@@ -83,7 +109,7 @@ const Navbar = () => {
             <nav style={navbarStyle} className={`custom-navbar w-full ${isScrolled ? 'fixed top-0 z-50 shadow-lg' : 'absolute'}`}>
                 <div className="max-w-screen-xl mx-auto px-5">
                     <div className="flex items-center justify-between md:py-4 py-5">
-                        <div className="flex items-center">
+                        <div className="flex items-center justify-between">
                             <div className="hidden lg:flex xl:space-x-7 md:space-x-4">
                                 <NavLink
                                     to='/'
@@ -99,64 +125,101 @@ const Navbar = () => {
                                     About
                                 </NavLink>
                                 <div>
-                                    <button className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300" onClick={handleMenuOpen}>
+                                    <button
+                                        className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300  space-x-1"
+                                        onClick={(event) => handleMenuOpen(event, 'services')}
+                                    >
                                         <span>Services</span>
-                                        {anchorEl ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
+                                        {anchorElServices ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
                                     </button>
                                     <Menu
-                                        anchorEl={anchorEl}
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleMenuClose}
+                                        anchorEl={anchorElServices}
+                                        open={Boolean(anchorElServices)}
+                                        onClose={() => handleMenuClose('services')}
                                         PaperProps={{
                                             style: {
                                                 width: '200px',
-                                                height: '300px',
+                                                height: '200px',
+                                                borderTop: '10px solid #EEC044',
                                             },
                                         }}
                                     >
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                        <MenuItem onClick={() => handleMenuClose('services')} style={{ borderBottom: '1px solid #e0e0e0' }}>
                                             <NavLink to='/services' className="text-base font-medium">
                                                 Services
                                             </NavLink>
                                         </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
+                                        <MenuItem onClick={() => handleMenuClose('services')} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/service2' className="text-base font-medium">
                                                 Service 1
                                             </NavLink>
                                         </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
+                                        <MenuItem onClick={() => handleMenuClose('services')} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/service2' className="text-base font-medium">
                                                 Service 2
-                                            </NavLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Service 3
-                                            </NavLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Service 4
-                                            </NavLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Service 5
-                                            </NavLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Service 6
                                             </NavLink>
                                         </MenuItem>
                                     </Menu>
                                 </div>
-                                <NavLink
-                                    to='/products'
-                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/products')}`}
-                                >
-                                    Products
-                                </NavLink>
+                                <div>
+                                    <button
+                                        className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300  space-x-1"
+                                        onClick={(event) => handleMenuOpen(event, 'products')}
+                                    >
+                                        <span>Products</span>
+                                        {anchorElProducts ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
+                                    </button>
+                                    <Menu
+                                        anchorEl={anchorElProducts}
+                                        open={Boolean(anchorElProducts)}
+                                        onClose={() => handleMenuClose('products')}
+                                        PaperProps={{
+                                            style: {
+                                                width: '200px',
+                                                height: '300px',
+                                                borderTop: '10px solid #EEC044',
+                                            },
+                                        }}
+                                    >
+                                        {/* Menu Items for Products */}
+                                        <MenuItem onClick={() => handleMenuClose('products')} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/products' className="text-base font-medium">
+                                                Products
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Products 1
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Products 1
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Products 1
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Products 1
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Products 1
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Products 1
+                                            </NavLink>
+                                        </MenuItem>
+                                    </Menu>
+                                </div>
+
                                 <NavLink
                                     to='/news'
                                     className={`block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/news')}`}
@@ -180,7 +243,7 @@ const Navbar = () => {
 
                         <div className="hidden lg:flex items-center gap-7">
                             <Searchbar />
-                            <Badge badgeContent={1} color="success" onClick={handleCartModalOpen} sx={{ cursor: 'pointer' }}>
+                            <Badge badgeContent={cartItems.length} color="success" onClick={handleCartModalOpen} sx={{ cursor: 'pointer' }}>
                                 <AddShoppingCartSharpIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
                             </Badge>
                             <Badge badgeContent={1} color="success" onClick={handleFavoriteModalOpen} sx={{ cursor: 'pointer' }}>
@@ -222,57 +285,40 @@ const Navbar = () => {
                     <div className="px-2 pt-2 pb-3 space-y-1 text-center">
                         <NavLink to='/' exact className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/')}`}>Home</NavLink>
                         <NavLink to='/about' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/about')}`}>About</NavLink>
-                        <div>
-                            <div className='flex justify-center'>
-                                <button className="block  px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300" onClick={handleMenuOpen}>
-                                    <span>Services</span>
-                                    {anchorEl ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
-                                </button>
-                            </div>
+                        <div className='flex justify-center'>
+                            <button
+                                className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 space-x-1"
+                                onClick={(event) => handleMenuOpen(event, 'services')}
+                            >
+                                <span>Services</span>
+                                {anchorElServices ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
+                            </button>
                             <Menu
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleMenuClose}
+                                anchorEl={anchorElServices}
+                                open={Boolean(anchorElServices)}
+                                onClose={() => handleMenuClose('services')}
                                 PaperProps={{
                                     style: {
                                         width: '200px',
-                                        height: '300px',
+                                        height: '200px',
+                                        borderTop: '10px solid #EEC044',
                                     },
                                 }}
                             >
-                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                {/* Menu Items for Services */}
+                                <MenuItem onClick={() => handleMenuClose('services')} style={{ borderBottom: '1px solid #e0e0e0' }}>
                                     <NavLink to='/services' className="text-base font-medium">
                                         Services
                                     </NavLink>
                                 </MenuItem>
-                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                    <NavLink to='/services/details' className="text-base font-medium">
-                                        Service 1
+                                <MenuItem onClick={() => handleMenuClose('services')} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services' className="text-base font-medium">
+                                        Services 1
                                     </NavLink>
                                 </MenuItem>
-                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                    <NavLink to='/services/details' className="text-base font-medium">
-                                        Service 2
-                                    </NavLink>
-                                </MenuItem>
-                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                    <NavLink to='/services/details' className="text-base font-medium">
-                                        Service 3
-                                    </NavLink>
-                                </MenuItem>
-                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                    <NavLink to='/services/details' className="text-base font-medium">
-                                        Service 4
-                                    </NavLink>
-                                </MenuItem>
-                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                    <NavLink to='/services/details' className="text-base font-medium">
-                                        Service 5
-                                    </NavLink>
-                                </MenuItem>
-                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                    <NavLink to='/services/details' className="text-base font-medium">
-                                        Service 6
+                                <MenuItem onClick={() => handleMenuClose('services')} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services' className="text-base font-medium">
+                                        Services 2
                                     </NavLink>
                                 </MenuItem>
                             </Menu>
@@ -405,26 +451,33 @@ const Navbar = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <TableRow>
-                                        <TableCell align="center">Sample Product</TableCell>
-                                        <TableCell align="center">$10.00</TableCell>
-                                        <TableCell align="center">
-                                            <IconButton aria-label="remove" onClick={decreaseQuantity}>
-                                                <RemoveIcon />
-                                            </IconButton>
-                                            {quantity}
-                                            <IconButton aria-label="add" onClick={increaseQuantity}>
-                                                <AddIcon />
-                                            </IconButton>
-                                        </TableCell>
-                                        <TableCell align="center">$10.00</TableCell>
-                                        <TableCell align="center">
-                                            <IconButton aria-label="remove">
-                                                <CloseIcon />
-                                            </IconButton>
-                                        </TableCell>
-                                    </TableRow>
+                                    {cartItems.map(item => (
+                                        <TableRow key={item.id}>
+                                            <TableCell align="center">{item.product_name}</TableCell>
+                                            <TableCell align="center">${item.price}</TableCell>
+                                            <TableCell align="center">
+                                                <IconButton aria-label="remove" onClick={() => handleDecrease(item)}>
+                                                    <RemoveIcon />
+                                                </IconButton>
+                                                {item.quantity}
+                                                <IconButton
+                                                    aria-label="add"
+                                                    onClick={() => handleIncrease(item)}
+                                                    disabled={item.quantity >= item.stock} // Disable button if quantity reaches stock limit
+                                                >
+                                                    <AddIcon />
+                                                </IconButton>
+                                            </TableCell>
+                                            <TableCell align="center">${(Number(item.price) * item.quantity).toFixed(2)}</TableCell>
+                                            <TableCell align="center">
+                                                <IconButton aria-label="remove" onClick={() => handleRemoveFromCart(item.id)}>
+                                                    <CloseIcon />
+                                                </IconButton>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
                                 </TableBody>
+
                             </Table>
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', mt: 2 }}>
@@ -554,7 +607,7 @@ const Navbar = () => {
                                 sx={{ width: { xs: '100%', sm: 'auto' } }}
                                 onClick={() => console.log('Checkout button clicked')}
                             >
-                                Proceed to Checkout
+                                Add to all Cart
                             </Button>
                         </Box>
 
