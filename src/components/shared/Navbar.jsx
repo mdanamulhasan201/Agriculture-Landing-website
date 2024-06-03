@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Submenu from './Submenu';
-import { IoCartOutline } from 'react-icons/io5';
+import { IoCartOutline, IoSearchSharp } from 'react-icons/io5';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import './style.css';
@@ -26,6 +26,9 @@ const Navbar = () => {
     const [cartModalOpen, setCartModalOpen] = useState(false);
     const [favoriteModalOpen, setFavoriteModalOpen] = useState(false);
     const [quantity, setQuantity] = useState(1);
+    const [searchModalOpen, setSearchModalOpen] = useState(false);
+
+
 
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
@@ -51,6 +54,8 @@ const Navbar = () => {
 
     const handleFavoriteModalOpen = () => setFavoriteModalOpen(true);
     const handleFavoriteModalClose = () => setFavoriteModalOpen(false);
+    const handleSearchModalOpen = () => setSearchModalOpen(true);
+    const handleSearchModalClose = () => setSearchModalOpen(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -79,7 +84,7 @@ const Navbar = () => {
             <Submenu />
             <nav style={navbarStyle} className={`custom-navbar w-full ${isScrolled ? 'fixed top-0 z-50 shadow-lg' : 'absolute'}`}>
                 <div className="max-w-screen-xl mx-auto px-5">
-                    <div className="flex items-center justify-between h-[75px]">
+                    <div className="flex items-center justify-between md:py-4 py-5">
                         <div className="flex items-center">
                             <div className="hidden lg:flex xl:space-x-12 md:space-x-4">
                                 <NavLink
@@ -157,10 +162,27 @@ const Navbar = () => {
                         </div>
 
                         {/* Mobile menu button */}
-                        <div className="flex lg:hidden">
-                            <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md text-gray-600 hover:bg-green-700 focus:outline-none">
-                                {isOpen ? <RxCross2 className='text-3xl' /> : <BiMenuAltRight className='text-3xl' />}
-                            </button>
+
+                        <div className="flex justify-between items-center w-full lg:hidden">
+                            <Link to='/'>
+                                <img className=' w-28' src='https://i.ibb.co/wsZpB6J/logo.png' alt="Logo" />
+                            </Link>
+                            <div>
+                                <div className="flex gap-5 items-center ">
+                                    {/* searchBar icon*/}
+                                    <Badge badgeContent={1} color="success" onClick={handleCartModalOpen} sx={{ cursor: 'pointer' }}>
+                                        <AddShoppingCartSharpIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
+                                    </Badge>
+                                    <Badge badgeContent={1} color="success" onClick={handleFavoriteModalOpen} sx={{ cursor: 'pointer' }}>
+                                        <FavoriteBorderIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
+                                    </Badge>
+                                    <IoSearchSharp className='text-2xl' onClick={handleSearchModalOpen} />
+                                    <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md text-gray-600 ">
+                                        {isOpen ? <RxCross2 className='text-3xl' /> : <BiMenuAltRight className='text-3xl' />}
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -178,13 +200,56 @@ const Navbar = () => {
                         <NavLink to='/contact' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/contact')}`}>Contact</NavLink>
                     </div>
 
-                    {/* Mobile search and cart */}
-                    <div className="flex flex-col items-center space-y-5 pb-20">
-                        <Searchbar />
-                        <IoCartOutline className='text-2xl' />
-                    </div>
+
                 </div>
             </nav>
+            {/* Modal for search bar */}
+            <Modal
+                aria-labelledby="search-modal-title"
+                aria-describedby="search-modal-description"
+                open={searchModalOpen}
+                onClose={handleSearchModalClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                    style: {
+                        backdropFilter: 'blur(5px)', // Adding background blur
+                    },
+                }}
+            >
+                <Fade in={searchModalOpen} timeout={500}>
+                    <Box sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: { xs: '90%', sm: '80%', md: 800 },
+                        bgcolor: 'background.paper',
+                        boxShadow: 24,
+                        p: 4,
+                        transition: 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out',
+                    }}>
+                        <IconButton
+                            aria-label="close"
+                            onClick={handleSearchModalClose}
+                            sx={{
+                                position: 'absolute',
+                                right: 8,
+                                top: 8,
+                                color: (theme) => theme.palette.grey[500],
+                            }}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                        <Typography id="search-modal-title" variant="h6" component="h2" fontWeight="bold" className='mb-52'>
+                            Search
+                        </Typography>
+                        {/* Your search bar component goes here */}
+                        <Searchbar />
+                    </Box>
+                </Fade>
+            </Modal>
 
             <Modal
                 aria-labelledby="cart-modal-title"
@@ -203,28 +268,11 @@ const Navbar = () => {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: 800,
+                        width: { xs: '90%', sm: '80%', md: 800 },
                         bgcolor: 'background.paper',
-                        // border: '2px solid #000',
                         boxShadow: 24,
                         p: 4,
                         transition: 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out',
-                        '&.modal-content-enter': {
-                            transform: 'scale(0.8)',
-                            opacity: 0,
-                        },
-                        '&.modal-content-enter-active': {
-                            transform: 'scale(1)',
-                            opacity: 1,
-                        },
-                        '&.modal-content-exit': {
-                            transform: 'scale(1)',
-                            opacity: 1,
-                        },
-                        '&.modal-content-exit-active': {
-                            transform: 'scale(0.8)',
-                            opacity: 0,
-                        },
                     }}>
                         <IconButton
                             aria-label="close"
@@ -241,10 +289,10 @@ const Navbar = () => {
                         <Typography id="cart-modal-title" variant="h6" component="h2" fontWeight="bold">
                             Cart Items
                         </Typography>
-                        <Typography id="cart-modal-description" sx={{ mt: 2 }}>
-                            <Table>
+                        <Box sx={{ mt: 2, maxHeight: '60vh', overflow: 'auto' }}>
+                            <Table sx={{ minWidth: 650 }}>
                                 <TableHead>
-                                    <TableRow align="center">
+                                    <TableRow>
                                         <TableCell align="center">
                                             <Typography variant="body1" fontWeight="bold">
                                                 Product
@@ -294,15 +342,24 @@ const Navbar = () => {
                                     </TableRow>
                                 </TableBody>
                             </Table>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                                <Button variant="contained" color="success">
-                                    View Full cart
-                                </Button>
-                                <Button variant="contained" color="secondary" onClick={() => console.log('Checkout button clicked')}>
-                                    Process to Checkout
-                                </Button>
-                            </Box>
-                        </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', mt: 2 }}>
+                            <Button
+                                variant="contained"
+                                color="success"
+                                sx={{ mb: { xs: 2, sm: 0 }, width: { xs: '100%', sm: 'auto' } }}
+                            >
+                                View Full Cart
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                sx={{ width: { xs: '100%', sm: 'auto' } }}
+                                onClick={() => console.log('Checkout button clicked')}
+                            >
+                                Proceed to Checkout
+                            </Button>
+                        </Box>
                     </Box>
                 </Fade>
             </Modal>
@@ -324,28 +381,11 @@ const Navbar = () => {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: 800,
+                        width: { xs: '90%', sm: '80%', md: 800 },
                         bgcolor: 'background.paper',
-                        // border: '2px solid #000',
                         boxShadow: 24,
                         p: 4,
                         transition: 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out',
-                        '&.modal-content-enter': {
-                            transform: 'scale(0.8)',
-                            opacity: 0,
-                        },
-                        '&.modal-content-enter-active': {
-                            transform: 'scale(1)',
-                            opacity: 1,
-                        },
-                        '&.modal-content-exit': {
-                            transform: 'scale(1)',
-                            opacity: 1,
-                        },
-                        '&.modal-content-exit-active': {
-                            transform: 'scale(0.8)',
-                            opacity: 0,
-                        },
                     }}>
                         <IconButton
                             aria-label="close"
@@ -362,10 +402,10 @@ const Navbar = () => {
                         <Typography id="cart-modal-title" variant="h6" component="h2" fontWeight="bold">
                             Wishlist Items
                         </Typography>
-                        <Typography id="cart-modal-description" sx={{ mt: 2 }}>
-                            <Table>
+                        <Box sx={{ mt: 2, maxHeight: '60vh', overflow: 'auto' }}>
+                            <Table sx={{ minWidth: 650 }}>
                                 <TableHead>
-                                    <TableRow align="center">
+                                    <TableRow>
                                         <TableCell align="center">
                                             <Typography variant="body1" fontWeight="bold">
                                                 Product
@@ -394,7 +434,6 @@ const Navbar = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {/* Sample row - replace with dynamic data */}
                                     <TableRow>
                                         <TableCell align="center">Sample Product</TableCell>
                                         <TableCell align="center">$10.00</TableCell>
@@ -416,16 +455,27 @@ const Navbar = () => {
                                     </TableRow>
                                 </TableBody>
                             </Table>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                                <Button variant="contained" color="success">
-                                    View Wishlist
-                                </Button>
-                                <Button variant="contained" color="secondary" onClick={() => console.log('Checkout button clicked')}>
-                                    Process to Checkout
-                                </Button>
-                            </Box>
-                        </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', mt: 2 }}>
+                            <Button
+                                variant="contained"
+                                color="success"
+                                sx={{ mb: { xs: 2, sm: 0 }, width: { xs: '100%', sm: 'auto' } }}
+                            >
+                                View Wishlist
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                sx={{ width: { xs: '100%', sm: 'auto' } }}
+                                onClick={() => console.log('Checkout button clicked')}
+                            >
+                                Proceed to Checkout
+                            </Button>
+                        </Box>
+
                     </Box>
+
                 </Fade>
             </Modal>
         </div>

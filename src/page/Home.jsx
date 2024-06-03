@@ -50,7 +50,7 @@ const Home = () => {
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-5 mt-[-40px] z-10'>
                     <div className='bg-white shadow-lg flex flex-col items-center gap-3 py-2 px-36 rounded-lg shadow-gray-400 hover:bg-green-100 transform duration-300 group'>
                         <p style={{ fontFamily: "'Covered By Your Grace', cursive" }} className='text-[#EEC044] text-xl'>Feature 01</p>
-                        <h1 className='text-lg font-semibold text-center whitespace-nowrap'>We're using a <br /> new technology</h1>
+                        <h1 className='text-lg font-semibold text-center whitespace-nowrap'>We are using a <br /> new technology</h1>
                         <img className="w-16 transform transition-transform duration-300 group-hover:scale-110" src={cardImge1} alt="" />
                     </div>
                     <div className='bg-white shadow-lg flex flex-col items-center gap-3 py-2 px-36 rounded-lg shadow-gray-400 hover:bg-green-100 transform duration-300 group'>
