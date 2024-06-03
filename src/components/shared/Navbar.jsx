@@ -1,34 +1,41 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import Submenu from './Submenu';
-import { IoCartOutline, IoSearchSharp } from 'react-icons/io5';
+import { IoSearchSharp } from 'react-icons/io5';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import './style.css';
 import navbr from '../../assets/nav.png';
 import Searchbar from '../searchbar/Searchbar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartSharpIcon from '@mui/icons-material/AddShoppingCartSharp';
-import { Badge, Modal, Box, Typography, IconButton, Fade, Backdrop, Table, TableHead, TableBody, TableRow, TableCell, Button } from '@mui/material';
+import { Badge, Modal, Box, Typography, IconButton, Fade, Backdrop, Table, TableHead, TableBody, TableRow, TableCell, Button, Menu, MenuItem } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import MenuLoginIcon from './menuLoginIcon';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const location = useLocation();
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
     const [cartModalOpen, setCartModalOpen] = useState(false);
     const [favoriteModalOpen, setFavoriteModalOpen] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [searchModalOpen, setSearchModalOpen] = useState(false);
 
+    const [anchorEl, setAnchorEl] = useState(null);
 
+    const handleMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
 
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
@@ -38,15 +45,6 @@ const Navbar = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
         }
-    };
-
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
     };
 
     const handleCartModalOpen = () => setCartModalOpen(true);
@@ -86,7 +84,7 @@ const Navbar = () => {
                 <div className="max-w-screen-xl mx-auto px-5">
                     <div className="flex items-center justify-between md:py-4 py-5">
                         <div className="flex items-center">
-                            <div className="hidden lg:flex xl:space-x-12 md:space-x-4">
+                            <div className="hidden lg:flex xl:space-x-7 md:space-x-4">
                                 <NavLink
                                     to='/'
                                     exact
@@ -101,27 +99,56 @@ const Navbar = () => {
                                     About
                                 </NavLink>
                                 <div>
-                                    <button
-                                        aria-controls={open ? 'services-menu' : undefined}
-                                        aria-haspopup="true"
-                                        aria-expanded={open ? 'true' : undefined}
-                                        onClick={handleClick}
-                                        className={`block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300`}
-                                    >
-                                        Services
+                                    <button className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300" onClick={handleMenuOpen}>
+                                        <span>Services</span>
+                                        {anchorEl ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
                                     </button>
                                     <Menu
-                                        id="services-menu"
                                         anchorEl={anchorEl}
-                                        open={open}
-                                        onClose={handleClose}
-                                        MenuListProps={{
-                                            'aria-labelledby': 'services-button',
+                                        open={Boolean(anchorEl)}
+                                        onClose={handleMenuClose}
+                                        PaperProps={{
+                                            style: {
+                                                width: '200px',
+                                                height: '300px',
+                                            },
                                         }}
                                     >
-                                        <MenuItem onClick={handleClose}>Service 1</MenuItem>
-                                        <MenuItem onClick={handleClose}>Service 2</MenuItem>
-                                        <MenuItem onClick={handleClose}>Service 3</MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services' className="text-base font-medium">
+                                                Services
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Service 1
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Service 2
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Service 3
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Service 4
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Service 5
+                                            </NavLink>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                            <NavLink to='/services/details' className="text-base font-medium">
+                                                Service 6
+                                            </NavLink>
+                                        </MenuItem>
                                     </Menu>
                                 </div>
                                 <NavLink
@@ -159,6 +186,8 @@ const Navbar = () => {
                             <Badge badgeContent={1} color="success" onClick={handleFavoriteModalOpen} sx={{ cursor: 'pointer' }}>
                                 <FavoriteBorderIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
                             </Badge>
+
+                            <MenuLoginIcon />
                         </div>
 
                         {/* Mobile menu button */}
@@ -170,13 +199,13 @@ const Navbar = () => {
                             <div>
                                 <div className="flex gap-5 items-center ">
                                     {/* searchBar icon*/}
+                                    <IoSearchSharp className='text-2xl' onClick={handleSearchModalOpen} />
                                     <Badge badgeContent={1} color="success" onClick={handleCartModalOpen} sx={{ cursor: 'pointer' }}>
                                         <AddShoppingCartSharpIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
                                     </Badge>
                                     <Badge badgeContent={1} color="success" onClick={handleFavoriteModalOpen} sx={{ cursor: 'pointer' }}>
                                         <FavoriteBorderIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
                                     </Badge>
-                                    <IoSearchSharp className='text-2xl' onClick={handleSearchModalOpen} />
                                     <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md text-gray-600 ">
                                         {isOpen ? <RxCross2 className='text-3xl' /> : <BiMenuAltRight className='text-3xl' />}
                                     </button>
@@ -193,8 +222,63 @@ const Navbar = () => {
                     <div className="px-2 pt-2 pb-3 space-y-1 text-center">
                         <NavLink to='/' exact className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/')}`}>Home</NavLink>
                         <NavLink to='/about' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/about')}`}>About</NavLink>
-                        <NavLink to='/service' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/service')}`}>Services</NavLink>
-                        <NavLink to='/products' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/products')}`}>Products</NavLink>
+                        <div>
+                            <div className='flex justify-center'>
+                                <button className="block  px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300" onClick={handleMenuOpen}>
+                                    <span>Services</span>
+                                    {anchorEl ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
+                                </button>
+                            </div>
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleMenuClose}
+                                PaperProps={{
+                                    style: {
+                                        width: '200px',
+                                        height: '300px',
+                                    },
+                                }}
+                            >
+                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services' className="text-base font-medium">
+                                        Services
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services/details' className="text-base font-medium">
+                                        Service 1
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services/details' className="text-base font-medium">
+                                        Service 2
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services/details' className="text-base font-medium">
+                                        Service 3
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services/details' className="text-base font-medium">
+                                        Service 4
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services/details' className="text-base font-medium">
+                                        Service 5
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
+                                    <NavLink to='/services/details' className="text-base font-medium">
+                                        Service 6
+                                    </NavLink>
+                                </MenuItem>
+                            </Menu>
+                        </div>
+                        <NavLink to='/products' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/products')}`}>  Products
+                        </NavLink>
                         <NavLink to='/news' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/news')}`}>News</NavLink>
                         <NavLink to='/shop' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/shop')}`}>Shop</NavLink>
                         <NavLink to='/contact' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/contact')}`}>Contact</NavLink>

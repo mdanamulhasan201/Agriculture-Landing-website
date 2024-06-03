@@ -1,5 +1,5 @@
 import logo from '../../assets/logo.png';
-import { FaFacebook, FaFacebookF, FaInstagram, FaPinterest, FaTwitter } from 'react-icons/fa';
+import {  FaFacebookF, FaInstagram, FaPinterest, FaTwitter } from 'react-icons/fa';
 import call from '../../assets/call.png';
 import icon from '../../assets/Icon.png';
 import location from '../../assets/Vector.png';
