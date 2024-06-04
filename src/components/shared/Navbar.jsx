@@ -17,7 +17,9 @@ import MenuLoginIcon from './menuLoginIcon';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart, deleteFromCart } from '../../features/cartSlice';
+import { addToCart, removeFromCart, deleteFromCart, addAllToCart } from '../../features/cartSlice';
+import { addToWishlist, clearWishlist, deleteFromWishlist, removeFromWishlist } from '../../features/wishlistSlice';
+import { toast } from 'react-toastify';
 
 
 const Navbar = () => {
@@ -26,13 +28,14 @@ const Navbar = () => {
     const location = useLocation();
     const [cartModalOpen, setCartModalOpen] = useState(false);
     const [favoriteModalOpen, setFavoriteModalOpen] = useState(false);
-    const [quantity, setQuantity] = useState(1);
     const [searchModalOpen, setSearchModalOpen] = useState(false);
     const [anchorElServices, setAnchorElServices] = useState(null);
     const [anchorElProducts, setAnchorElProducts] = useState(null);
     const cartItems = useSelector((state) => state.cart.items);
+    const wishlistItems = useSelector((state) => state.wishlist.items);
     const dispatch = useDispatch();
 
+    // **********cart handle************
     const handleIncrease = (item) => {
         dispatch(addToCart(item));
     };
@@ -43,6 +46,28 @@ const Navbar = () => {
 
     const handleRemoveFromCart = (id) => {
         dispatch(deleteFromCart({ id }));
+        toast.success("Removed  from cart!");
+    };
+
+    // **********wishlist handle************
+    const handleIncreaseWishlist = (product) => {
+        dispatch(addToWishlist(product));
+    };
+
+    const handleDecreaseFromWishlist = (product) => {
+        dispatch(removeFromWishlist(product));
+    };
+
+    const handleRemoveFromWishlist = (id) => {
+        dispatch(deleteFromWishlist({ id }));
+        toast.success("Removed  from wishlist!");
+    };
+
+    //******** add to all cart *******
+    const handleAddAllToCart = () => {
+        dispatch(addAllToCart(wishlistItems));
+        dispatch(clearWishlist());
+        toast.success('Added all wishlist items to cart!');
     };
 
     const handleMenuOpen = (event, menu) => {
@@ -58,18 +83,6 @@ const Navbar = () => {
             setAnchorElServices(null);
         } else if (menu === 'products') {
             setAnchorElProducts(null);
-        }
-    };
-
-
-
-    const increaseQuantity = () => {
-        setQuantity(quantity + 1);
-    };
-
-    const decreaseQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
         }
     };
 
@@ -246,7 +259,7 @@ const Navbar = () => {
                             <Badge badgeContent={cartItems.length} color="success" onClick={handleCartModalOpen} sx={{ cursor: 'pointer' }}>
                                 <AddShoppingCartSharpIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
                             </Badge>
-                            <Badge badgeContent={1} color="success" onClick={handleFavoriteModalOpen} sx={{ cursor: 'pointer' }}>
+                            <Badge badgeContent={wishlistItems.length} color="success" onClick={handleFavoriteModalOpen} sx={{ cursor: 'pointer' }}>
                                 <FavoriteBorderIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
                             </Badge>
 
@@ -381,6 +394,7 @@ const Navbar = () => {
                 </Fade>
             </Modal>
 
+            {/**************add to cart modal****************/}
             <Modal
                 aria-labelledby="cart-modal-title"
                 aria-describedby="cart-modal-description"
@@ -423,7 +437,7 @@ const Navbar = () => {
                             <Table sx={{ minWidth: 650 }}>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">
+                                        <TableCell>
                                             <Typography variant="body1" fontWeight="bold">
                                                 Product
                                             </Typography>
@@ -453,7 +467,12 @@ const Navbar = () => {
                                 <TableBody>
                                     {cartItems.map(item => (
                                         <TableRow key={item.id}>
-                                            <TableCell align="center">{item.product_name}</TableCell>
+                                            <TableCell align="center">
+                                                <div className='flex  items-center '>
+                                                    <img src={item.image} alt={item.product_name} className='w-28 border p-1 rounded' />
+                                                    <span className='ms-5 text-md font-semibold'>{item.product_name}</span>
+                                                </div>
+                                            </TableCell>
                                             <TableCell align="center">${item.price}</TableCell>
                                             <TableCell align="center">
                                                 <IconButton aria-label="remove" onClick={() => handleDecrease(item)}>
@@ -501,6 +520,7 @@ const Navbar = () => {
                 </Fade>
             </Modal>
 
+            {/* *****************add to wishlist*************** */}
             <Modal
                 aria-labelledby="favorite-modal-title"
                 aria-describedby="favorite-modal-description"
@@ -543,7 +563,7 @@ const Navbar = () => {
                             <Table sx={{ minWidth: 650 }}>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">
+                                        <TableCell>
                                             <Typography variant="body1" fontWeight="bold">
                                                 Product
                                             </Typography>
@@ -571,25 +591,36 @@ const Navbar = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <TableRow>
-                                        <TableCell align="center">Sample Product</TableCell>
-                                        <TableCell align="center">$10.00</TableCell>
-                                        <TableCell align="center">
-                                            <IconButton aria-label="remove" onClick={decreaseQuantity}>
-                                                <RemoveIcon />
-                                            </IconButton>
-                                            {quantity}
-                                            <IconButton aria-label="add" onClick={increaseQuantity}>
-                                                <AddIcon />
-                                            </IconButton>
-                                        </TableCell>
-                                        <TableCell align="center">$10.00</TableCell>
-                                        <TableCell align="center">
-                                            <IconButton aria-label="remove">
-                                                <CloseIcon />
-                                            </IconButton>
-                                        </TableCell>
-                                    </TableRow>
+                                    {wishlistItems.map(item => (
+                                        <TableRow key={item.id}>
+                                            <TableCell align="center">
+                                                <div className='flex  items-center '>
+                                                    <img src={item.image} alt={item.product_name} className='w-28 border p-1 rounded' />
+                                                    <span className='ms-5 text-md font-semibold'>{item.product_name}</span>
+                                                </div>
+                                            </TableCell>
+                                            <TableCell align="center">${item.price}</TableCell>
+                                            <TableCell align="center">
+                                                <IconButton aria-label="remove" onClick={() => handleDecreaseFromWishlist(item)}>
+                                                    <RemoveIcon />
+                                                </IconButton>
+                                                {item.quantity}
+                                                <IconButton
+                                                    aria-label="add"
+                                                    onClick={() => handleIncreaseWishlist(item)}
+                                                    disabled={item.quantity >= item.stock} // Disable button if quantity reaches stock limit
+                                                >
+                                                    <AddIcon />
+                                                </IconButton>
+                                            </TableCell>
+                                            <TableCell align="center">${(Number(item.price) * item.quantity).toFixed(2)}</TableCell>
+                                            <TableCell align="center">
+                                                <IconButton aria-label="remove" onClick={() => handleRemoveFromWishlist(item.id)}>
+                                                    <CloseIcon />
+                                                </IconButton>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
                                 </TableBody>
                             </Table>
                         </Box>
@@ -605,7 +636,8 @@ const Navbar = () => {
                                 variant="contained"
                                 color="secondary"
                                 sx={{ width: { xs: '100%', sm: 'auto' } }}
-                                onClick={() => console.log('Checkout button clicked')}
+                                // onClick={() => console.log('Checkout button clicked')}
+                                onClick={handleAddAllToCart}
                             >
                                 Add to all Cart
                             </Button>

@@ -7,6 +7,9 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoCartOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
+import { addToWishlist } from '../../features/wishlistSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../features/cartSlice';
 
 const Products_details = () => {
     const { id } = useParams();
@@ -16,7 +19,9 @@ const Products_details = () => {
     const [quantity, setQuantity] = useState(1);
     const [reviews, setReviews] = useState([]);
     const [newReview, setNewReview] = useState({ name: '', email: '', review: '', date: new Date().toLocaleDateString() });
-
+    const dispatch = useDispatch();
+    const wishlistItems = useSelector((state) => state.wishlist.items);
+    const cartItems = useSelector(state => state.cart.items);
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -40,9 +45,30 @@ const Products_details = () => {
         setReviews(storedReviews);
     }, [id]);
 
-    const handleAddToCart = (product) => {
-        toast.success(`Added ${product.product_name} to cart! Quantity: ${quantity}`);
+
+
+    const handleAddToWishList = (product) => {
+        const existingItem = wishlistItems.find(item => item.id === product.id);
+        if (existingItem) {
+            toast.error(`${product.product_name} is already in the wishlist!`);
+        } else {
+            dispatch(addToWishlist(product));
+            toast.success(`Added ${product.product_name} to cart!`);
+        }
     };
+
+
+
+    const handleAddToCart = (product) => {
+        const existingItem = cartItems.find(item => item.id === product.id);
+        if (existingItem) {
+            toast.error(`${product.product_name} is already in the cart!`);
+        } else {
+            dispatch(addToCart(product));
+            toast.success(`Added ${product.product_name} to cart!`);
+        }
+    };
+
 
     const incrementQuantity = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -72,14 +98,14 @@ const Products_details = () => {
             toast.error("Please fill out all fields");
             return;
         }
-    
+
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(newReview.email)) {
             toast.error("Please enter a valid email address");
             return;
         }
-    
+
         // If all checks pass, proceed with review submission
         const updatedReviews = [...reviews, newReview];
         setReviews(updatedReviews);
@@ -87,7 +113,7 @@ const Products_details = () => {
         setNewReview({ name: '', email: '', review: '', date: new Date().toLocaleDateString() });
         toast.success("Review submitted successfully");
     };
-    
+
 
     if (loading) {
         return <p>Loading...</p>;
@@ -157,7 +183,7 @@ const Products_details = () => {
                             <button onClick={() => handleAddToCart(product)} className='mt-5 border  transform duration-300 hover:text-white  font-semibold text-[14px] font-monrope hover:bg-[#58ce54] px-10 py-4 text-white rounded-lg bg-[#4BAF47]'>
                                 <span className='flex items-center gap-2'><IoCartOutline className='text-2xl' />Add to cart</span>
                             </button>
-                            <button onClick={() => handleAddToCart(product)} className='mt-5 border  transform duration-300 hover:text-white  font-semibold text-[14px] font-monrope hover:bg-[#eec144dc] px-10 py-4 text-white rounded-lg bg-[#EEC044]'>
+                            <button onClick={() => handleAddToWishList(product)} className='mt-5 border  transform duration-300 hover:text-white  font-semibold text-[14px] font-monrope hover:bg-[#eec144dc] px-10 py-4 text-white rounded-lg bg-[#EEC044]'>
                                 <span className='flex items-center gap-2'><IoMdHeartEmpty className='text-2xl' />Add to wishlist</span>
                             </button>
                         </div>
@@ -176,16 +202,16 @@ const Products_details = () => {
 
                 <div className='mt-20'>
                     <p className='text-xl font-bold font-monrope '>{product.review} review for {product.product_name}</p>
-                    <div  className='mt-10 flex items-center gap-10'>
-                            <div className='w-24 h-24 overflow-hidden rounded-full'>
-                                <img className='w-full h-full object-cover' src={product.review_image} alt="" />
-                            </div>
-                            <div>
-                                <h1 className='text-xl font-semibold mb-2'>{product.review_name}</h1>
-                                <h1 className='text-sm text-[#4BAF47] mb-2 font-semibold'>{product.date}</h1>
-                                <p className='text-[#878680] font-sans'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid odio deleniti, debitis ad nam repellat accusantium voluptate porro laboriosam! Sed.</p>
-                            </div>
+                    <div className='mt-10 flex items-center gap-10'>
+                        <div className='w-24 h-24 overflow-hidden rounded-full'>
+                            <img className='w-full h-full object-cover' src={product.review_image} alt="" />
                         </div>
+                        <div>
+                            <h1 className='text-xl font-semibold mb-2'>{product.review_name}</h1>
+                            <h1 className='text-sm text-[#4BAF47] mb-2 font-semibold'>{product.date}</h1>
+                            <p className='text-[#878680] font-sans'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid odio deleniti, debitis ad nam repellat accusantium voluptate porro laboriosam! Sed.</p>
+                        </div>
+                    </div>
                     <hr className='my-10' />
                 </div>
 
