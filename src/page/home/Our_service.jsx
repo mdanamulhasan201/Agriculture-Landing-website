@@ -53,13 +53,13 @@ const ImageSlider = ({ images }) => {
 const Our_service = () => {
     return (
         <div className="bg-[#F8F7F0]">
-            <div className="max-w-screen-xl mx-auto py-10">
+            <div className="max-w-screen-xl mx-auto py-10 px-5">
                 <p style={{ fontFamily: "'Covered By Your Grace', cursive" }} className='text-[#EEC044] text-center text-xl'>Our Services</p>
                 <h1 className="text-center text-4xl font-semibold font-monrope">
                     What We Offer
                 </h1>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center my-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center  my-10">
                     {/* Card 1 */}
                     <div className="relative bg-[#FFFFFF] w-72 overflow-hidden">
                         <ImageSlider images={agricultureImages} />

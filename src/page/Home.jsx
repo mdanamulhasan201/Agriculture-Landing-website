@@ -1,6 +1,6 @@
-import bg from '../assets/bg.png';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/elements.png';
-import { motion } from 'framer-motion';
 import cardImge1 from '../assets/cardimg1.png';
 import cardImge2 from '../assets/cardimg2.png';
 import cardImge3 from '../assets/cardimg3.png';
@@ -12,40 +12,124 @@ import Farming from './home/Farming';
 import Latest_products from './home/Latest_products';
 import { FaArrowRight } from 'react-icons/fa';
 import { Button } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import './style.css';
+
+const images = [
+    {
+        url: 'https://i.ibb.co/tJgWT94/bg.png',
+        title: 'Agriculture & ',
+        title2: 'Eco Farming',
+        subtitle: 'Welcome to Agrios Farming',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.'
+    },
+    {
+        url: 'https://i.ibb.co/7ktP3Pj/bg-3.png',
+        title: 'Agriculture',
+        title2: '& Organic Market',
+        subtitle: 'Welcome to Agrios Farming',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.'
+    },
+    {
+        url: 'https://i.ibb.co/J3DRmWk/bg-2.png',
+        title: 'Natural Products',
+        title2: 'For Lovers of Healthy',
+        title3: 'Organic Food',
+        subtitle: 'Join Us for a Greener Future',
+        text: 'Discover the benefits of sustainable farming and eco-friendly practices.'
+    },
+];
 
 const Home = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        }, 6000); // Change image every 6 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const goToNextSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    };
+
+    const goToPreviousSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    };
+
+    const currentImage = images[currentIndex];
 
     return (
         <div>
-            <div style={{ backgroundImage: `url(${bg})` }}
-                className="bg-cover bg-center text-white flex items-center h-[750px] mt-[51px]">
-                <div className='w-full max-w-screen-xl mx-auto px-4 lg:px-8'>
-                    <p className='text-left text-sm md:text-base lg:text-lg font-light uppercase'>Welcome to Agrios Farming</p>
-                    <h1 className='text-left text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>Agriculture <span className='text-[#EEC044]'>&</span><br />Eco Farming</h1>
-                    <p className='mt-5 text-gray-300'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br /> Ut elit tellus,
-                        luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                    <div className='mt-10 flex items-center gap-6'>
-                        <Button
-                            variant="contained"
-                            endIcon={<FaArrowRight />}
-                            color="success"
-                            loading
-                            sx={{
-                                padding: '12px 15px', borderRadius: '5px', backgroundColor: '#4BAF47', color: 'white', '&:hover': { backgroundColor: '#6cd469' }
-                            }}
-                        >
-                            Discover More
-                        </Button>
-                        <motion.img
-                            src={logo}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 2 }}
-                        />
-                    </div>
+            <div className="relative min-h-screen mt-[51px]">
+                <AnimatePresence>
+                    <motion.div
+                        key={`${currentImage.url}_${currentIndex}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1 }}
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${currentImage.url})` }}
+                    >
+                        <div className="flex items-center justify-center min-h-screen text-white">
+                            <div className='w-full max-w-screen-xl mx-auto px-4 lg:px-8'>
+                                <div>
+                                    <p className='text-left text-sm md:text-base lg:text-lg font-light uppercase'>{currentImage.subtitle}</p>
+                                    <h1 className='text-left text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
+                                        {currentImage.title.split(' ').map((word, index) => (
+                                            index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
+                                        ))}
+                                    </h1>
+                                    {currentImage.title2 && (
+                                        <h1 className='text-left text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
+                                            {currentImage.title2.split(' ').map((word, index) => (
+                                                index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
+                                            ))}
+                                        </h1>
+                                    )}
+                                    {currentImage.title3 && (
+                                        <h1 className='text-left text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
+                                            {currentImage.title3.split(' ').map((word, index) => (
+                                                index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
+                                            ))}
+                                        </h1>
+                                    )}
+                                    <p className='mt-5 text-gray-300'>{currentImage.text.split('<br />').map((line, index) => (
+                                        <React.Fragment key={index}>{line}<br /></React.Fragment>
+                                    ))}</p>
+                                    <div className='mt-10 flex items-center gap-6'>
+                                        <Button
+                                            variant="contained"
+                                            endIcon={<FaArrowRight />}
+                                            color="success"
+                                            sx={{
+                                                padding: '12px 15px', borderRadius: '5px', backgroundColor: '#4BAF47', color: 'white', '&:hover': { backgroundColor: '#6cd469' }
+                                            }}
+                                        >
+                                            Discover More
+                                        </Button>
+                                        <motion.img
+                                            src={logo}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 10 }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
+                <div className='btn-dv '>
+                    <button className='btn1 hover:bg-green-500 hover:text-white transform duration-300' onClick={goToPreviousSlide}><ArrowBackIcon className='icn' /></button>
+                    <button className='btn2 hover:bg-green-500 hover:text-white transform duration-300' onClick={goToNextSlide}><ArrowForwardIcon className='icn' /></button>
                 </div>
             </div>
-            <div className='max-w-screen-xl mx-auto'>
+            <div className='max-w-screen-xl mx-auto px-5'>
                 {/* section card */}
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-5 mt-[-40px] z-10'>
                     <div className='bg-white shadow-lg flex flex-col items-center gap-3 py-2 px-10 rounded-lg shadow-gray-400 hover:bg-green-100 transform duration-300 group'>
@@ -66,7 +150,7 @@ const Home = () => {
                 </div>
 
                 {/*  section two */}
-                <div className='grid grid-cols-1 md:grid-cols-2 justify-between mt-28 mx-2 md:mx-0'>
+                <div className='grid grid-cols-1 md:grid-cols-2 justify-between mt-28 px-5'>
                     <div className="relative">
                         <img className="w-[350px] transform transition-transform duration-300 hover:scale-105" src={sectionImg} alt="Main" />
                         <div className="absolute left-0 top-0 mt-[200px] ml-[-10px] md:mt-[260px] md:ml-[-40px] z-10">
@@ -82,7 +166,7 @@ const Home = () => {
                         <p className='text-[#878680]'>There are many variations of passages of lorem ipsum available but the
                             majority have suffered alteration in some form by injected humor or
                             random word which don’t look even.</p>
-                        <div className='flex my-5 items-center gap-2 w-[100%] justify-between '>
+                        <div className='flex flex-col sm:flex-row my-5 items-center gap-10 w-[100%] justify-between '>
                             <div className='flex items-center gap-3'>
                                 <img className='w-20' src="https://i.ibb.co/4tCJK40/Icon.png" alt="" />
                                 <p className='text-lg font-semibold'>Growing fruits <br />
@@ -108,12 +192,10 @@ const Home = () => {
                         </div>
                         <button className='px-8 py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300'>Discover more</button>
                     </div>
-
-
                 </div>
             </div>
-            <Our_service></Our_service>
-            <Farming></Farming>
+            <Our_service />
+            <Farming />
             <Latest_products />
         </div>
     );

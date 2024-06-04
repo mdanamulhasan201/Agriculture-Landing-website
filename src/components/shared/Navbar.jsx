@@ -117,14 +117,16 @@ const Navbar = () => {
     const navbarStyle = {
         backgroundImage: isScrolled ? 'none' : `url(${navbr})`,
         backgroundColor: isScrolled ? '#F8F7F1' : 'transparent',
-    };
+        transition: 'background-color 0.5s ease, background-image 0.5s ease', // Add smooth transition
+        zIndex: '50', // Set a negative z-index
+      };
 
     const isActiveLink = (path) => location.pathname === path ? 'text-green-500 underline underline-offset-4' : '';
 
     return (
         <div>
             <Submenu />
-            <nav style={navbarStyle} className={`custom-navbar w-full ${isScrolled ? 'fixed top-0 z-50 shadow-lg' : 'absolute'}`}>
+            <nav style={navbarStyle} className={`custom-navbar w-full ${isScrolled ? 'fixed top-0 z-50 shadow-lg ' : 'absolute'}`}>
                 <div className="max-w-screen-xl mx-auto px-5">
                     <div className="flex items-center justify-between md:py-4 py-5">
                         <div className="flex items-center justify-between">
