@@ -146,7 +146,7 @@ const Products_details = () => {
                     <h1 className='text-center text-white text-4xl font-bold font-monrope mt-5'>Product Details</h1>
                 </div>
             </div>
-            <div className='max-w-screen-xl mx-auto py-10 px-2 md:px-0'>
+            <div className='max-w-screen-xl mx-auto py-10 px-5'>
                 <div className='flex flex-col md:flex-row items-center'>
                     <img
                         src={product.image}
@@ -179,7 +179,7 @@ const Products_details = () => {
                             </div>
                         </div>
 
-                        <div className='flex items-center gap-5 mt-6'>
+                        <div className='flex items-center justify-center md:justify-start  gap-5 mt-6'>
                             <button onClick={() => handleAddToCart(product)} className='mt-5 border  transform duration-300 hover:text-white  font-semibold text-[14px] font-monrope hover:bg-[#58ce54] px-10 py-4 text-white rounded-lg bg-[#4BAF47]'>
                                 <span className='flex items-center gap-2'><IoCartOutline className='text-2xl' />Add to cart</span>
                             </button>

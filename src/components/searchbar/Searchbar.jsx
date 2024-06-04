@@ -115,7 +115,6 @@ const Searchbar = () => {
 
     return (
         <div>
-            <ToastContainer />
             <Search>
                 <SearchIconWrapper>
                     <SearchIcon />

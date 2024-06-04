@@ -65,10 +65,15 @@ const Navbar = () => {
 
     //******** add to all cart *******
     const handleAddAllToCart = () => {
-        dispatch(addAllToCart(wishlistItems));
-        dispatch(clearWishlist());
-        toast.success('Added all wishlist items to cart!');
+        if (wishlistItems.length > 0) {
+            dispatch(addAllToCart(wishlistItems));
+            dispatch(clearWishlist());
+            toast.success('Added all wishlist items to cart!');
+        } else {
+            toast.error('No items found in the wishlist!');
+        }
     };
+
 
     const handleMenuOpen = (event, menu) => {
         if (menu === 'services') {
@@ -276,10 +281,10 @@ const Navbar = () => {
                                 <div className="flex gap-5 items-center ">
                                     {/* searchBar icon*/}
                                     <IoSearchSharp className='text-2xl' onClick={handleSearchModalOpen} />
-                                    <Badge badgeContent={1} color="success" onClick={handleCartModalOpen} sx={{ cursor: 'pointer' }}>
+                                    <Badge badgeContent={cartItems.length} color="success" onClick={handleCartModalOpen} sx={{ cursor: 'pointer' }}>
                                         <AddShoppingCartSharpIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
                                     </Badge>
-                                    <Badge badgeContent={1} color="success" onClick={handleFavoriteModalOpen} sx={{ cursor: 'pointer' }}>
+                                    <Badge badgeContent={wishlistItems.length} color="success" onClick={handleFavoriteModalOpen} sx={{ cursor: 'pointer' }}>
                                         <FavoriteBorderIcon className='bg-[#ECF5E8]' style={{ height: '40px', width: '40px', borderRadius: '50%', padding: '10px' }} />
                                     </Badge>
                                     <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md text-gray-600 ">
@@ -346,7 +351,7 @@ const Navbar = () => {
 
                 </div>
             </nav>
-            {/* Modal for search bar */}
+            {/*************Modal for search bar ***************/}
             <Modal
                 aria-labelledby="search-modal-title"
                 aria-describedby="search-modal-description"
@@ -465,36 +470,42 @@ const Navbar = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {cartItems.map(item => (
-                                        <TableRow key={item.id}>
-                                            <TableCell align="center">
-                                                <div className='flex  items-center '>
-                                                    <img src={item.image} alt={item.product_name} className='w-28 border p-1 rounded' />
-                                                    <span className='ms-5 text-md font-semibold'>{item.product_name}</span>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell align="center">${item.price}</TableCell>
-                                            <TableCell align="center">
-                                                <IconButton aria-label="remove" onClick={() => handleDecrease(item)}>
-                                                    <RemoveIcon />
-                                                </IconButton>
-                                                {item.quantity}
-                                                <IconButton
-                                                    aria-label="add"
-                                                    onClick={() => handleIncrease(item)}
-                                                    disabled={item.quantity >= item.stock} // Disable button if quantity reaches stock limit
-                                                >
-                                                    <AddIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                            <TableCell align="center">${(Number(item.price) * item.quantity).toFixed(2)}</TableCell>
-                                            <TableCell align="center">
-                                                <IconButton aria-label="remove" onClick={() => handleRemoveFromCart(item.id)}>
-                                                    <CloseIcon />
-                                                </IconButton>
-                                            </TableCell>
+                                    {cartItems.length === 0 ? (
+                                        <TableRow>
+                                            <TableCell colSpan={5} align="center">No items add to wishlist</TableCell>
                                         </TableRow>
-                                    ))}
+                                    ) : (
+                                        cartItems.map(item => (
+                                            <TableRow key={item.id}>
+                                                <TableCell align="center">
+                                                    <div className='flex items-center'>
+                                                        <img src={item.image} alt={item.product_name} className='w-28 border p-1 rounded' />
+                                                        <span className='ms-5 text-md font-semibold'>{item.product_name}</span>
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell align="center">${item.price}</TableCell>
+                                                <TableCell align="center">
+                                                    <IconButton aria-label="remove" onClick={() => handleDecrease(item)}>
+                                                        <RemoveIcon />
+                                                    </IconButton>
+                                                    {item.quantity}
+                                                    <IconButton
+                                                        aria-label="add"
+                                                        onClick={() => handleIncrease(item)}
+                                                        disabled={item.quantity >= item.stock}
+                                                    >
+                                                        <AddIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                                <TableCell align="center">${(Number(item.price) * item.quantity).toFixed(2)}</TableCell>
+                                                <TableCell align="center">
+                                                    <IconButton aria-label="remove" onClick={() => handleRemoveFromCart(item.id)}>
+                                                        <CloseIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))
+                                    )}
                                 </TableBody>
 
                             </Table>
@@ -591,37 +602,44 @@ const Navbar = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {wishlistItems.map(item => (
-                                        <TableRow key={item.id}>
-                                            <TableCell align="center">
-                                                <div className='flex  items-center '>
-                                                    <img src={item.image} alt={item.product_name} className='w-28 border p-1 rounded' />
-                                                    <span className='ms-5 text-md font-semibold'>{item.product_name}</span>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell align="center">${item.price}</TableCell>
-                                            <TableCell align="center">
-                                                <IconButton aria-label="remove" onClick={() => handleDecreaseFromWishlist(item)}>
-                                                    <RemoveIcon />
-                                                </IconButton>
-                                                {item.quantity}
-                                                <IconButton
-                                                    aria-label="add"
-                                                    onClick={() => handleIncreaseWishlist(item)}
-                                                    disabled={item.quantity >= item.stock} // Disable button if quantity reaches stock limit
-                                                >
-                                                    <AddIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                            <TableCell align="center">${(Number(item.price) * item.quantity).toFixed(2)}</TableCell>
-                                            <TableCell align="center">
-                                                <IconButton aria-label="remove" onClick={() => handleRemoveFromWishlist(item.id)}>
-                                                    <CloseIcon />
-                                                </IconButton>
-                                            </TableCell>
+                                    {wishlistItems.length > 0 ? (
+                                        wishlistItems.map(item => (
+                                            <TableRow key={item.id}>
+                                                <TableCell align="center">
+                                                    <div className='flex  items-center '>
+                                                        <img src={item.image} alt={item.product_name} className='w-28 border p-1 rounded' />
+                                                        <span className='ms-5 text-md font-semibold'>{item.product_name}</span>
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell align="center">${item.price}</TableCell>
+                                                <TableCell align="center">
+                                                    <IconButton aria-label="remove" onClick={() => handleDecreaseFromWishlist(item)}>
+                                                        <RemoveIcon />
+                                                    </IconButton>
+                                                    {item.quantity}
+                                                    <IconButton
+                                                        aria-label="add"
+                                                        onClick={() => handleIncreaseWishlist(item)}
+                                                        disabled={item.quantity >= item.stock} // Disable button if quantity reaches stock limit
+                                                    >
+                                                        <AddIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                                <TableCell align="center">${(Number(item.price) * item.quantity).toFixed(2)}</TableCell>
+                                                <TableCell align="center">
+                                                    <IconButton aria-label="remove" onClick={() => handleRemoveFromWishlist(item.id)}>
+                                                        <CloseIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))
+                                    ) : (
+                                        <TableRow>
+                                            <TableCell colSpan={5} align="center">No items add to wishlist</TableCell>
                                         </TableRow>
-                                    ))}
+                                    )}
                                 </TableBody>
+
                             </Table>
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', mt: 2 }}>
