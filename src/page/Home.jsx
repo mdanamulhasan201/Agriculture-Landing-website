@@ -35,7 +35,7 @@ const images = [
         url: 'https://i.ibb.co/J3DRmWk/bg-2.png',
         title: 'Natural Products',
         title2: 'For Lovers of Healthy',
-        title3: 'Organic Food',
+
         subtitle: 'Join Us for a Greener Future',
         text: 'Discover the benefits of sustainable farming and eco-friendly practices.'
     },
@@ -61,6 +61,17 @@ const Home = () => {
     };
 
     const currentImage = images[currentIndex];
+    // Function to chunk text into 300-word segments
+    const chunkText = (text, chunkSize) => {
+        const words = text.split(' ');
+        const chunks = [];
+        for (let i = 0; i < words.length; i += chunkSize) {
+            chunks.push(words.slice(i, i + chunkSize).join(' '));
+        }
+        return chunks;
+    };
+
+    const textChunks = chunkText(currentImage.text, 10);
 
     return (
         <div>
@@ -77,49 +88,54 @@ const Home = () => {
                     >
                         <div className="flex items-center justify-center min-h-screen text-white">
                             <div className='w-full max-w-screen-xl mx-auto px-4 lg:px-8'>
-                                <div>
-                                    <p className='text-left text-sm md:text-base lg:text-lg font-light uppercase'>{currentImage.subtitle}</p>
-                                    <h1 className='text-left text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
-                                        {currentImage.title.split(' ').map((word, index) => (
-                                            index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
-                                        ))}
-                                    </h1>
-                                    {currentImage.title2 && (
-                                        <h1 className='text-left text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
-                                            {currentImage.title2.split(' ').map((word, index) => (
+                                <div className="text-animation-container">
+                                    <motion.div
+                                        className='text-sm md:text-base lg:text-lg font-light uppercase'
+                                        initial={{ opacity: 0, y: -20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 1 }}
+                                    >
+                                        <p className='text-sm md:text-base lg:text-lg font-light uppercase'>{currentImage.subtitle}</p>
+                                        <h1 className='text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
+                                            {currentImage.title.split(' ').map((word, index) => (
                                                 index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
                                             ))}
                                         </h1>
-                                    )}
-                                    {currentImage.title3 && (
-                                        <h1 className='text-left text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
-                                            {currentImage.title3.split(' ').map((word, index) => (
-                                                index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
+                                        {currentImage.title2 && (
+                                            <h1 className='text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
+                                                {currentImage.title2.split(' ').map((word, index) => (
+                                                    index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
+                                                ))}
+                                            </h1>
+                                        )}
+                                        <p className='mt-5 text-gray-300'>
+                                            {textChunks.map((chunk, index) => (
+                                                <React.Fragment key={index}>
+                                                    {chunk}<br />
+                                                </React.Fragment>
                                             ))}
-                                        </h1>
-                                    )}
-                                    <p className='mt-5 text-gray-300'>{currentImage.text.split('<br />').map((line, index) => (
-                                        <React.Fragment key={index}>{line}<br /></React.Fragment>
-                                    ))}</p>
-                                    <div className='mt-10 flex items-center gap-6'>
-                                        <Button
-                                            variant="contained"
-                                            endIcon={<FaArrowRight />}
-                                            color="success"
-                                            sx={{
-                                                padding: '12px 15px', borderRadius: '5px', backgroundColor: '#4BAF47', color: 'white', '&:hover': { backgroundColor: '#6cd469' }
-                                            }}
-                                        >
-                                            Discover More
-                                        </Button>
-                                        <motion.img
-                                            src={logo}
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ duration: 10 }}
-                                        />
-                                    </div>
+                                        </p>
+                                        <div className='mt-10 flex items-center gap-6'>
+                                            <Button
+                                                variant="contained"
+                                                endIcon={<FaArrowRight />}
+                                                color="success"
+                                                sx={{
+                                                    padding: '12px 15px', borderRadius: '5px', backgroundColor: '#4BAF47', color: 'white', '&:hover': { backgroundColor: '#6cd469' }
+                                                }}
+                                            >
+                                                Discover More
+                                            </Button>
+                                            <motion.img
+                                                src={logo}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ duration: 10 }}
+                                            />
+                                        </div>
+                                    </motion.div>
                                 </div>
+
                             </div>
                         </div>
                     </motion.div>
