@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import tree from '../../assets/tree-icon.png';
 
 const Our_service = () => {
     const [products, setProducts] = useState([]);
@@ -44,7 +43,6 @@ const Our_service = () => {
                             </div>
                         ))
                     }
-
                 </div>
             </div>
         </div>
