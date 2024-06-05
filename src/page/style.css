@@ -20,17 +20,17 @@
   margin-left: 20px;
 }
 
-.btn-dv{
-    position: absolute;
-    right: 15%;
-    z-index: 1;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    row-gap: 7px;
+.btn-dv {
+  position: absolute;
+  right: 18%;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  row-gap: 7px;
 }
 
-.icn{
-    rotate: 45deg;
+.icn {
+  rotate: 45deg;
 }

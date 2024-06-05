@@ -146,7 +146,7 @@ const Navbar = () => {
                                 </NavLink>
                                 <div>
                                     <button
-                                        className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300  space-x-1"
+                                        className="flex gap-1px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300  space-x-1"
                                         onClick={(event) => handleMenuOpen(event, 'services')}
                                     >
                                         <span>Services</span>
@@ -183,7 +183,7 @@ const Navbar = () => {
                                 </div>
                                 <div>
                                     <button
-                                        className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300  space-x-1"
+                                        className="px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 flex gap-1"
                                         onClick={(event) => handleMenuOpen(event, 'products')}
                                     >
                                         <span>Products</span>

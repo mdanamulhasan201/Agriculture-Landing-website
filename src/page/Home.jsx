@@ -96,13 +96,13 @@ const Home = () => {
                                         transition={{ duration: 1 }}
                                     >
                                         <p className='text-sm md:text-base lg:text-lg font-light uppercase'>{currentImage.subtitle}</p>
-                                        <h1 className='text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
+                                        <h1 className='text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
                                             {currentImage.title.split(' ').map((word, index) => (
                                                 index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
                                             ))}
                                         </h1>
                                         {currentImage.title2 && (
-                                            <h1 className='text-5xl md:text-6xl lg:text-8xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
+                                            <h1 className='text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
                                                 {currentImage.title2.split(' ').map((word, index) => (
                                                     index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
                                                 ))}
@@ -135,15 +135,16 @@ const Home = () => {
                                         </div>
                                     </motion.div>
                                 </div>
-
+                                <div className='btn-dv '>
+                                    <button className='btn1 hover:bg-green-500 hover:text-white transform duration-300' onClick={goToPreviousSlide}><ArrowBackIcon className='icn' /></button>
+                                    <button className='btn2 hover:bg-green-500 hover:text-white transform duration-300' onClick={goToNextSlide}><ArrowForwardIcon className='icn' /></button>
+                                </div>
                             </div>
+
                         </div>
                     </motion.div>
                 </AnimatePresence>
-                <div className='btn-dv '>
-                    <button className='btn1 hover:bg-green-500 hover:text-white transform duration-300' onClick={goToPreviousSlide}><ArrowBackIcon className='icn' /></button>
-                    <button className='btn2 hover:bg-green-500 hover:text-white transform duration-300' onClick={goToNextSlide}><ArrowForwardIcon className='icn' /></button>
-                </div>
+
             </div>
             <div className='max-w-screen-xl mx-auto px-5'>
                 {/* section card */}
