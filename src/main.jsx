@@ -8,6 +8,8 @@ import { router } from './routes/Route';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import { ToastContainer } from 'react-toastify';
+import ScrollToTopButtom from './components/ScrollToTopButtom';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -15,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <RouterProvider router={router} />
     </Provider>
     <ToastContainer />
+    <ScrollToTopButtom />
   </React.StrictMode>,
 )
 

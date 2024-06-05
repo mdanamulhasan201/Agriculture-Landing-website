@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         monrope: ["Monrope", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"], // Add the new font family here
       },
     },
   },
