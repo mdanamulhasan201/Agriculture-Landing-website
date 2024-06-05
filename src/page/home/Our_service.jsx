@@ -36,7 +36,7 @@ const Our_service = () => {
                         <Link
                             key={product.id}
                             to={`service/${product.id}`}
-                            className={`relative bg-[#FFFFFF] w-64 overflow-hidden transition-shadow duration-300 ${hoveredIndex === index ? 'shadow-md shadow-[#C5CE38]' : 'shadow-none'}`}
+                            className={`relative bg-[#FFFFFF] w-64 overflow-hidden transition-shadow duration-300 ${hoveredIndex === index ? 'shadow-md shadow-[#C5CE38]' : 'shadow-md'}`}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
