@@ -1,5 +1,4 @@
-
-import { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
@@ -10,7 +9,7 @@ const Our_service = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('whatWeOffer.json');
+                const response = await fetch('/whatWeOffer.json');
                 if (!response.ok) {
                     throw new Error('Failed to fetch products');
                 }
@@ -36,15 +35,16 @@ const Our_service = () => {
                     {products.map((product, index) => (
                         <Link
                             key={product.id}
+                            to={`service/${product.id}`}
                             className={`relative bg-[#FFFFFF] w-64 overflow-hidden transition-shadow duration-300 ${hoveredIndex === index ? 'shadow-md shadow-[#C5CE38]' : 'shadow-none'}`}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
-                            <img className='h-40 w-64' src={product.img1} alt="" />
+                            <img className='h-40 w-64' src={product.img1} alt={product.offerName} />
                             <div
-                                className={`absolute top-[45%] left-3/4 transform -translate-x-1/2 -translate-y-1/2 bg-[${hoveredIndex === index ? '#EEC044' : '#C5CE38'}] w-16 h-16 #C5CE38 rounded-md flex items-center justify-center transition-background-color duration-300`}
+                                className={`absolute top-[45%] left-3/4 transform -translate-x-1/2 -translate-y-1/2 bg-[${hoveredIndex === index ? '#EEC044' : '#C5CE38'}] w-16 h-16 rounded-md flex items-center justify-center transition-background-color duration-300`}
                             >
-                                <img src={product.icon} alt="" className="w-10" />
+                                <img src={product.icon} alt={product.offerName} className="w-10" />
                             </div>
                             <div className='p-5'>
                                 <div className="mt-5">
@@ -67,4 +67,4 @@ const Our_service = () => {
     );
 };
 
-export default Our_service
+export default Our_service;
