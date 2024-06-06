@@ -39,7 +39,7 @@ const Footer = () => {
                 <div className="max-w-screen-xl mx-auto px-5 py-14">
                     <div className="w-full">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5">
-                            {/* **********left side*************/}
+                            {/* **********Logo sections*************/}
                             <div className="flex flex-col items-center md:items-start">
                                 <img className="w-48" src="https://i.ibb.co/pQ64Z7N/Link-logo-logo-2x-white-1-webp.png" alt="" />
                                 <p className="text-gray-400 mt-5 text-center md:text-start">
@@ -62,13 +62,13 @@ const Footer = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* ***********left side2**********/}
+                            {/* ***********Explore**********/}
                             <div>
                                 <h1 className="text-white text-xl font-semibold font-monrope mt-2">Explore</h1>
                                 <img className="w-60" src="https://i.ibb.co/gRQ5QMt/div-elementor-element.png" alt="" />
                                 <div className="">
                                     <ul className="flex gap-10">
-                                        <div className="flex flex-col gap-5">
+                                        <div className="flex flex-col gap-4">
                                             <Link to='/about' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
@@ -94,7 +94,7 @@ const Footer = () => {
                                                 </li>
                                             </Link>
                                         </div>
-                                        <div className="flex flex-col gap-5">
+                                        <div className="flex flex-col gap-4">
                                             <Link to='/careers' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
@@ -118,11 +118,11 @@ const Footer = () => {
                                     </ul>
                                 </div>
                             </div>
-                            {/* ***********middle**************/}
+                            {/* ***********Contacts**************/}
                             <div>
-                                <h1 className="text-white text-xl font-semibold font-monrope mt-2">Contact</h1>
+                                <h1 className="text-white text-xl font-semibold font-monrope mt-2">Contacts</h1>
                                 <img className="w-60" src="https://i.ibb.co/gRQ5QMt/div-elementor-element.png" alt="" />
-                                <div className="flex flex-col gap-5">
+                                <div className="flex flex-col gap-4">
                                     <div>
                                         <p className="flex items-center gap-2 text-md font-monrope text-gray-400">
                                             <IoMdTime className="text-xl text-[#EEC044]" /> <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
@@ -151,7 +151,7 @@ const Footer = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* **********right side***********/}
+                            {/* **********Newsletter***********/}
                             <div>
                                 <h1 className="text-white text-xl font-semibold font-monrope mt-2 self-start">Newsletter</h1>
                                 <img className="w-60" src="https://i.ibb.co/gRQ5QMt/div-elementor-element.png" alt="" />

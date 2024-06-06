@@ -41,7 +41,7 @@ const LatestProducts = () => {
 
     return (
         <div className="bg-[#E9F1EE]">
-            <div className="max-w-screen-xl mx-auto py-10">
+            <div className="max-w-screen-xl mx-auto py-10 px-5">
                 <div>
                     <p style={{ fontFamily: "'Covered By Your Grace', cursive" }} className='text-[#EEC044] text-xl text-center'>Recently Added</p>
                     <h1 className="text-center text-3xl font-semibold font-monrope">Latest Products</h1>

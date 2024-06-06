@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { Box, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
-import { FaSpinner } from 'react-icons/fa'; // Import spinner icon
+import { FaSpinner } from 'react-icons/fa';
 import { IoMdPaperPlane } from 'react-icons/io';
 
 const Service_details = () => {
@@ -13,7 +13,7 @@ const Service_details = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [errors, setErrors] = useState({ name: '', email: '', message: '' });
-    const [isLoading, setIsLoading] = useState(false); // Add loading state
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -61,14 +61,14 @@ const Service_details = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            setIsLoading(true); // Set loading state
+            setIsLoading(true);
             setTimeout(() => {
                 toast.success('Your question has been submitted!');
                 setName('');
                 setEmail('');
                 setMessage('');
-                setIsLoading(false); // Reset loading state
-            }, 2000); // Simulate a delay for API call
+                setIsLoading(false);
+            }, 2000);
         }
     };
 
@@ -103,6 +103,7 @@ const Service_details = () => {
             </div>
             <div className="max-w-screen-xl mx-auto px-6 mt-20">
                 <div className='flex justify-center flex-col md:flex-row md:items-start items-center gap-5 w-full'>
+                    {/* ************service list**********/}
                     <div className='md:w-4/12 w-full'>
                         <div className='bg-[#F6F6F6]'>
                             <div className='py-14 px-5'>
@@ -116,7 +117,7 @@ const Service_details = () => {
                                 ))}
                             </div>
                         </div>
-                        {/* Form visible on md and up */}
+                        {/* **********Form visible on md and up************/}
                         <form className='py-10 hidden md:block' onSubmit={handleSubmit}>
                             <h1 className='text-xl'>Have any Question?</h1>
                             <Box sx={{ margin: '20px 0' }}>
@@ -183,7 +184,7 @@ const Service_details = () => {
                         </div>
                     </div>
                 </div>
-                {/* Form visible on sm and below */}
+                {/* ***************Form visible on sm and below*****************/}
                 <div className='block md:hidden'>
                     <form className='py-10' onSubmit={handleSubmit}>
                         <h1 className='text-xl'>Have any Question?</h1>
@@ -228,7 +229,7 @@ const Service_details = () => {
                             ) : (
                                 <>
                                     <span>Submit Question</span>
-                                    <IoMdPaperPlane className="text-lg ms-1"/>
+                                    <IoMdPaperPlane className="text-lg ms-1" />
                                 </>
 
                             )}

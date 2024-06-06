@@ -6,10 +6,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
 import { IoCartOutline } from "react-icons/io5";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeartEmpty, IoMdPaperPlane } from "react-icons/io";
 import { addToWishlist } from '../../features/wishlistSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../features/cartSlice';
+import { FaSpinner } from 'react-icons/fa';
 
 const Products_details = () => {
     const { id } = useParams();
@@ -22,6 +23,7 @@ const Products_details = () => {
     const dispatch = useDispatch();
     const wishlistItems = useSelector((state) => state.wishlist.items);
     const cartItems = useSelector(state => state.cart.items);
+    const [isSubmittingReview, setIsSubmittingReview] = useState(false);
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -93,9 +95,12 @@ const Products_details = () => {
     };
 
     const handleReviewSubmit = () => {
+        // Set the loading state to true when starting to submit the review
+        setIsSubmittingReview(true);
         // Basic validation checks
         if (!newReview.name.trim() || !newReview.email.trim() || !newReview.review.trim()) {
             toast.error("Please fill out all fields");
+            setIsSubmittingReview(false); // Reset loading state
             return;
         }
 
@@ -103,16 +108,21 @@ const Products_details = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(newReview.email)) {
             toast.error("Please enter a valid email address");
+            setIsSubmittingReview(false); // Reset loading state
             return;
         }
 
-        // If all checks pass, proceed with review submission
-        const updatedReviews = [...reviews, newReview];
-        setReviews(updatedReviews);
-        localStorage.setItem(`reviews-${id}`, JSON.stringify(updatedReviews));
-        setNewReview({ name: '', email: '', review: '', date: new Date().toLocaleDateString() });
-        toast.success("Review submitted successfully");
+        // Simulate a delay of 2 seconds for the loading spinner
+        setTimeout(() => {
+            const updatedReviews = [...reviews, newReview];
+            setReviews(updatedReviews);
+            localStorage.setItem(`reviews-${id}`, JSON.stringify(updatedReviews));
+            setNewReview({ name: '', email: '', review: '', date: new Date().toLocaleDateString() });
+            toast.success("Review submitted successfully");
+            setIsSubmittingReview(false);
+        }, 2000);
     };
+
 
 
     if (loading) {
@@ -248,11 +258,26 @@ const Products_details = () => {
                         />
                     </div>
                     <button
-                        className="p-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+                        className={'mt-5 flex items-center justify-center gap-1 w-2/12 p-3 bg-[#4BAF47] font-monrope text-white rounded-md hover:bg-[#6cd469] transform duration-300'}
                         onClick={handleReviewSubmit}
+                        disabled={isSubmittingReview}
                     >
-                        Submit Review
+                        {isSubmittingReview ? (
+                            <>
+                                <FaSpinner className="animate-spin " />
+
+                            </>
+                        ) : (
+
+                            <>
+                                <span>Submit Review</span>
+                                <IoMdPaperPlane className="text-lg ms-1" />
+                            </>
+                        )}
                     </button>
+
+
+
                 </div>
             </div>
         </div>
