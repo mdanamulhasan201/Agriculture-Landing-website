@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { Box, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
+import { FaSpinner } from 'react-icons/fa'; // Import spinner icon
+import { IoMdPaperPlane } from 'react-icons/io';
 
 const Service_details = () => {
     const { id } = useParams();
@@ -11,6 +13,7 @@ const Service_details = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [errors, setErrors] = useState({ name: '', email: '', message: '' });
+    const [isLoading, setIsLoading] = useState(false); // Add loading state
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -58,10 +61,14 @@ const Service_details = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            toast.success('Your question has been submitted!');
-            setName('');
-            setEmail('');
-            setMessage('');
+            setIsLoading(true); // Set loading state
+            setTimeout(() => {
+                toast.success('Your question has been submitted!');
+                setName('');
+                setEmail('');
+                setMessage('');
+                setIsLoading(false); // Reset loading state
+            }, 2000); // Simulate a delay for API call
         }
     };
 
@@ -143,7 +150,21 @@ const Service_details = () => {
                                     sx={{ width: '100%', marginTop: '20px' }}
                                 />
                             </Box>
-                            <button type="submit" className='px-8 py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300 font-semibold'>Submit Question</button>
+                            <button
+                                type="submit"
+                                className='flex w-6/12 items-center justify-center px-7 py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300 font-semibold'
+                                disabled={isLoading}
+                            >
+                                {isLoading ? (
+                                    <FaSpinner className="animate-spin h-5 w-5 mr-2" />
+                                ) : (
+                                    <>
+                                        <span>Submit Question</span>
+                                        <IoMdPaperPlane className="text-lg ms-1" />
+                                    </>
+                                )}
+                            </button>
+
                         </form>
                     </div>
                     <div className='md:w-8/12 w-full'>
@@ -158,7 +179,7 @@ const Service_details = () => {
                             <div className='grid grid-cols-2 gap-5 my-10'>
                                 <img className='w-full h-[200px]' src={product.img2} alt="" />
                                 <img className='w-full h-[200px]' src={product.img1} alt="" />
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -197,7 +218,22 @@ const Service_details = () => {
                                 sx={{ width: '100%', marginTop: '20px' }}
                             />
                         </Box>
-                        <button type="submit" className='px-8 py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300 font-semibold'>Submit Question</button>
+                        <button
+                            type="submit"
+                            className='flex w-6/12 items-center justify-center px-7 py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300 font-semibold'
+                            disabled={isLoading}
+                        >
+                            {isLoading ? (
+                                <FaSpinner className="animate-spin h-5 w-5 mr-2" />
+                            ) : (
+                                <>
+                                    <span>Submit Question</span>
+                                    <IoMdPaperPlane className="text-lg ms-1"/>
+                                </>
+
+                            )}
+                        </button>
+
                     </form>
                 </div>
             </div>

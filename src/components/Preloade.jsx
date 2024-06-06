@@ -1,4 +1,3 @@
-
 import { FallingLines } from 'react-loader-spinner';
 const Preloader = () => {
     return (

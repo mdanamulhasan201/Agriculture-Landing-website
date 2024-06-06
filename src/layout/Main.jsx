@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/shared/Navbar';
 import Preloader from '../components/Preloade';
+import Footer from '../components/shared/Footer';
 
 
 const Main = () => {
@@ -25,6 +26,7 @@ const Main = () => {
                 <>
                     <Navbar />
                     <Outlet />
+                    <Footer />
                 </>
             )}
         </div>
