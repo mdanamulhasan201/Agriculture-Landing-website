@@ -258,25 +258,23 @@ const Products_details = () => {
                         />
                     </div>
                     <button
-                        className={'mt-5 flex items-center justify-center gap-1 w-2/12 p-3 bg-[#4BAF47] font-monrope text-white rounded-md hover:bg-[#6cd469] transform duration-300'}
+                        className={`relative mt-5 flex items-center justify-center gap-1 w-2/12 p-3 bg-[#4BAF47] font-monrope text-white rounded-md hover:bg-[#6cd469] transform duration-300 ${isSubmittingReview ? 'opacity-50 pointer-events-none' : ''
+                            }`}
                         onClick={handleReviewSubmit}
                         disabled={isSubmittingReview}
                     >
                         {isSubmittingReview ? (
                             <>
-                                <FaSpinner className="animate-spin " />
-
+                                <FaSpinner className="animate-spin" />
+                                <IoMdPaperPlane className="text-lg ms-1 opacity-0 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                             </>
                         ) : (
-
                             <>
                                 <span>Submit Review</span>
-                                <IoMdPaperPlane className="text-lg ms-1" />
+                                <IoMdPaperPlane className="text-lg ms-1 transition duration-300" />
                             </>
                         )}
                     </button>
-
-
 
                 </div>
             </div>

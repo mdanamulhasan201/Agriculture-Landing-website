@@ -104,7 +104,7 @@ const Service_details = () => {
             <div className="max-w-screen-xl mx-auto px-6 mt-20">
                 <div className='flex justify-center flex-col md:flex-row md:items-start items-center gap-5 w-full'>
                     {/* ************service list**********/}
-                    <div className='md:w-4/12 w-full'>
+                    <div className='md:w-[27%] w-full'>
                         <div className='bg-[#F6F6F6]'>
                             <div className='py-14 px-5'>
                                 <h1 className='text-xl font-semibold'>Service List</h1>
@@ -168,7 +168,7 @@ const Service_details = () => {
 
                         </form>
                     </div>
-                    <div className='md:w-8/12 w-full'>
+                    <div className='md:w-[70%] w-full'>
                         <div>
                             <img src={product.img1} alt={product.offerName} className="w-full h-[500px]" />
                             <h1 className="text-4xl font-semibold font-monrope mt-5 text-gray-700">{product.offerName}</h1>
