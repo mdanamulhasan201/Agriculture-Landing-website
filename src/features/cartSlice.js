@@ -5,10 +5,20 @@ const saveCartToLocalStorage = (cart) => {
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
+const loadCartFromLocalStorage = () => {
+  try {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    return cart ? cart : [];
+  } catch (e) {
+    console.error("Failed to parse cart from localStorage", e);
+    return [];
+  }
+};
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: JSON.parse(localStorage.getItem("cart")) || [],
+    items: loadCartFromLocalStorage(),
   },
   reducers: {
     addToCart: (state, action) => {
@@ -16,9 +26,9 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += action.payload.quantity;
       } else {
-        state.items.push({ ...action.payload, quantity: 1 });
+        state.items.push({ ...action.payload, quantity: action.payload.quantity });
       }
       saveCartToLocalStorage(state.items);
     },
@@ -27,8 +37,11 @@ const cartSlice = createSlice({
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
-      if (existingItem && existingItem.quantity > 1) {
+      if (existingItem) {
         existingItem.quantity -= 1;
+        if (existingItem.quantity === 0) {
+          state.items = state.items.filter((item) => item.id !== action.payload.id);
+        }
       }
       saveCartToLocalStorage(state.items);
     },
@@ -37,7 +50,7 @@ const cartSlice = createSlice({
       state.items = state.items.filter((item) => item.id !== action.payload.id);
       saveCartToLocalStorage(state.items);
     },
-    
+
     addAllToCart: (state, action) => {
       action.payload.forEach((item) => {
         const existingItem = state.items.find(
@@ -48,12 +61,11 @@ const cartSlice = createSlice({
         } else {
           state.items.push({ ...item });
         }
-        saveCartToLocalStorage(state.items);
       });
+      saveCartToLocalStorage(state.items);
     },
   },
 });
 
-export const { addToCart, removeFromCart, deleteFromCart, addAllToCart } =
-  cartSlice.actions;
+export const { addToCart, removeFromCart, deleteFromCart, addAllToCart } = cartSlice.actions;
 export default cartSlice.reducer;

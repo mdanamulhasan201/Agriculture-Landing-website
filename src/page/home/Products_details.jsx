@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { TbCurrencyTaka } from "react-icons/tb";
 import { toast } from 'react-toastify';
@@ -24,6 +24,7 @@ const Products_details = () => {
     const wishlistItems = useSelector((state) => state.wishlist.items);
     const cartItems = useSelector(state => state.cart.items);
     const [isSubmittingReview, setIsSubmittingReview] = useState(false);
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -48,37 +49,52 @@ const Products_details = () => {
     }, [id]);
 
 
-
+    // ****************add to wishlist********
     const handleAddToWishList = (product) => {
         const existingItem = wishlistItems.find(item => item.id === product.id);
         if (existingItem) {
             toast.error(`${product.product_name} is already in the wishlist!`);
         } else {
-            dispatch(addToWishlist(product));
-            toast.success(`Added ${product.product_name} to cart!`);
+            const productWithQuantity = { ...product, quantity };
+            dispatch(addToWishlist(productWithQuantity));
+            toast.success(`Added ${product.product_name} to wishlist!`);
         }
     };
 
 
 
+    // ***************add to cart********
     const handleAddToCart = (product) => {
         const existingItem = cartItems.find(item => item.id === product.id);
         if (existingItem) {
             toast.error(`${product.product_name} is already in the cart!`);
         } else {
-            dispatch(addToCart(product));
+            const productWithQuantity = { ...product, quantity };
+            dispatch(addToCart(productWithQuantity));
             toast.success(`Added ${product.product_name} to cart!`);
         }
     };
 
 
-    const incrementQuantity = () => {
-        setQuantity(prevQuantity => prevQuantity + 1);
-    };
 
-    const decrementQuantity = () => {
-        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    const incrementQuantity = () => {
+        setQuantity(prevQuantity => {
+            const newQuantity = prevQuantity + 1;
+            return newQuantity;
+        });
+        toast.success(`Quantity increased to ${quantity + 1}`);
     };
+    const decrementQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(prevQuantity => {
+                const newQuantity = prevQuantity - 1;
+                return newQuantity;
+            });
+            toast.info(`Quantity decreased to ${quantity - 1}`);
+        } else {
+            toast.warn('Quantity cannot be less than 1');
+        }
+    }
 
     const handleQuantityChange = (event) => {
         const value = event.target.value;
@@ -95,24 +111,22 @@ const Products_details = () => {
     };
 
     const handleReviewSubmit = () => {
-        // Set the loading state to true when starting to submit the review
         setIsSubmittingReview(true);
-        // Basic validation checks
         if (!newReview.name.trim() || !newReview.email.trim() || !newReview.review.trim()) {
             toast.error("Please fill out all fields");
-            setIsSubmittingReview(false); // Reset loading state
+            setIsSubmittingReview(false);
             return;
         }
 
-        // Validate email format
+        // ***************Validate email format****************
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(newReview.email)) {
             toast.error("Please enter a valid email address");
-            setIsSubmittingReview(false); // Reset loading state
+            setIsSubmittingReview(false);
             return;
         }
 
-        // Simulate a delay of 2 seconds for the loading spinner
+        // ************Simulate a delay of 2 seconds for the loading spinner*********
         setTimeout(() => {
             const updatedReviews = [...reviews, newReview];
             setReviews(updatedReviews);
@@ -152,7 +166,7 @@ const Products_details = () => {
         <div>
             <div style={divStyle}>
                 <div>
-                    <p className="text-center text-white opacity-75">Home / product / product-details</p>
+                    <p className="text-center text-white opacity-75"> <Link to='/' className='hover:text-[#49A760] transform duration-300'>Home</Link> / product / product-details</p>
                     <h1 className='text-center text-white text-4xl font-bold font-monrope mt-5'>Product Details</h1>
                 </div>
             </div>
@@ -283,3 +297,5 @@ const Products_details = () => {
 };
 
 export default Products_details;
+
+

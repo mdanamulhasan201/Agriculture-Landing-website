@@ -119,9 +119,16 @@ const Navbar = () => {
         backgroundColor: isScrolled ? '#F8F7F1' : 'transparent',
         transition: 'background-color 0.5s ease, background-image 0.5s ease', // Add smooth transition
         zIndex: '50', // Set a negative z-index
-      };
+    };
 
-    const isActiveLink = (path) => location.pathname === path ? 'text-green-500 underline underline-offset-4' : '';
+    // ******* add to cart ************
+    const handleAddToCart = (item) => {
+        dispatch(addToCart(item));
+        dispatch(deleteFromWishlist({ id: item.id }));
+        toast.success(`${item.product_name} added to cart!`);
+    };
+
+    const isActiveLink = (path) => location.pathname === path ? 'text-[#4BAF47] underline underline-offset-4' : '';
 
     return (
         <div>
@@ -134,19 +141,19 @@ const Navbar = () => {
                                 <NavLink
                                     to='/'
                                     exact
-                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/')}`}
+                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/')}`}
                                 >
                                     Home
                                 </NavLink>
                                 <NavLink
                                     to='/about'
-                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/about')}`}
+                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/about')}`}
                                 >
                                     About
                                 </NavLink>
                                 <div>
                                     <button
-                                        className="flex gap-1px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300  space-x-1"
+                                        className="flex gap-1px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300  space-x-1"
                                         onClick={(event) => handleMenuOpen(event, 'services')}
                                     >
                                         <span>Services</span>
@@ -183,7 +190,7 @@ const Navbar = () => {
                                 </div>
                                 <div>
                                     <button
-                                        className="px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 flex gap-1"
+                                        className="px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 flex gap-1"
                                         onClick={(event) => handleMenuOpen(event, 'products')}
                                     >
                                         <span>Products</span>
@@ -242,19 +249,19 @@ const Navbar = () => {
 
                                 <NavLink
                                     to='/news'
-                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/news')}`}
+                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/news')}`}
                                 >
                                     News
                                 </NavLink>
                                 <NavLink
                                     to='/shop'
-                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/shop')}`}
+                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/shop')}`}
                                 >
                                     Shop
                                 </NavLink>
                                 <NavLink
                                     to='/contact'
-                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/contact')}`}
+                                    className={`block px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 ${isActiveLink('/contact')}`}
                                 >
                                     Contact
                                 </NavLink>
@@ -307,7 +314,7 @@ const Navbar = () => {
                         <NavLink to='/about' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/about')}`}>About</NavLink>
                         <div className='flex justify-center'>
                             <button
-                                className="block px-3 py-2 rounded-md text-base font-medium hover:text-green-500 hover:underline hover:underline-offset-4 duration-300 space-x-1"
+                                className="block px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 space-x-1"
                                 onClick={(event) => handleMenuOpen(event, 'services')}
                             >
                                 <span>Services</span>
@@ -454,6 +461,7 @@ const Navbar = () => {
                                                 Price
                                             </Typography>
                                         </TableCell>
+
                                         <TableCell align="center">
                                             <Typography variant="body1" fontWeight="bold">
                                                 Quantity
@@ -486,6 +494,7 @@ const Navbar = () => {
                                                     </div>
                                                 </TableCell>
                                                 <TableCell align="center">${item.price}</TableCell>
+
                                                 <TableCell align="center">
                                                     <IconButton aria-label="remove" onClick={() => handleDecrease(item)}>
                                                         <RemoveIcon />
@@ -500,6 +509,7 @@ const Navbar = () => {
                                                     </IconButton>
                                                 </TableCell>
                                                 <TableCell align="center">${(Number(item.price) * item.quantity).toFixed(2)}</TableCell>
+
                                                 <TableCell align="center">
                                                     <IconButton aria-label="remove" onClick={() => handleRemoveFromCart(item.id)}>
                                                         <CloseIcon />
@@ -598,6 +608,11 @@ const Navbar = () => {
                                         </TableCell>
                                         <TableCell align="center">
                                             <Typography variant="body1" fontWeight="bold">
+                                                Action
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <Typography variant="body1" fontWeight="bold">
                                                 Remove
                                             </Typography>
                                         </TableCell>
@@ -627,7 +642,11 @@ const Navbar = () => {
                                                         <AddIcon />
                                                     </IconButton>
                                                 </TableCell>
+
                                                 <TableCell align="center">${(Number(item.price) * item.quantity).toFixed(2)}</TableCell>
+                                                <TableCell align="center">
+                                                    <button className='text-[#4BAF47]' onClick={() => handleAddToCart(item)}>Add to cart</button>
+                                                </TableCell>
                                                 <TableCell align="center">
                                                     <IconButton aria-label="remove" onClick={() => handleRemoveFromWishlist(item.id)}>
                                                         <CloseIcon />
@@ -637,7 +656,7 @@ const Navbar = () => {
                                         ))
                                     ) : (
                                         <TableRow>
-                                            <TableCell colSpan={5} align="center">No items add to wishlist</TableCell>
+                                            <TableCell colSpan={6} align="center">No items add to wishlist</TableCell>
                                         </TableRow>
                                     )}
                                 </TableBody>

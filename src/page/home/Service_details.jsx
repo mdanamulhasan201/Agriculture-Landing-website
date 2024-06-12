@@ -4,7 +4,7 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { Box, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 import { FaSpinner } from 'react-icons/fa';
-import { IoMdPaperPlane } from 'react-icons/io';
+import { IoMdHome, IoMdPaperPlane } from 'react-icons/io';
 
 const Service_details = () => {
     const { id } = useParams();
@@ -96,9 +96,13 @@ const Service_details = () => {
             <div style={divStyle}>
                 <div>
                     <h1 className='text-center text-white text-4xl font-bold font-monrope mt-5'>Service Details</h1>
-                    <p className="text-center text-white opacity-75 mt-2">
-                        <Link className='hover:text-[#4BAF47] transform duration-300' to='/'>Home</Link> / {product.offerName}
+                    <p className="text-center text-white opacity-75 mt-2 flex justify-center items-center">
+                        <Link className='hover:text-[#4BAF47] transform duration-300' to='/'>
+                            <span className='flex items-center gap-1'><IoMdHome />
+                                Home </span>
+                        </Link> / {product.offerName}
                     </p>
+
                 </div>
             </div>
             <div className="max-w-screen-xl mx-auto px-6 mt-20">
@@ -153,7 +157,7 @@ const Service_details = () => {
                             </Box>
                             <button
                                 type="submit"
-                                className='flex w-6/12 items-center justify-center px-7 py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300 font-semibold'
+                                className='flex w-full whitespace-nowrap items-center justify-center  py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300 font-semibold'
                                 disabled={isLoading}
                             >
                                 {isLoading ? (
@@ -221,7 +225,7 @@ const Service_details = () => {
                         </Box>
                         <button
                             type="submit"
-                            className='flex w-6/12 items-center justify-center px-7 py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300 font-semibold'
+                            className='flex w-full white items-center justify-center py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300 font-semibold'
                             disabled={isLoading}
                         >
                             {isLoading ? (

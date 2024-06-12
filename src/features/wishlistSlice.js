@@ -1,14 +1,24 @@
-// features/cartSlice.js
+// features/wishlistSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const saveWishlistToLocalStorage = (wishlist) => {
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 };
 
+const loadWishlistFromLocalStorage = () => {
+  try {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist"));
+    return wishlist ? wishlist : [];
+  } catch (e) {
+    console.error("Failed to parse wishlist from localStorage", e);
+    return [];
+  }
+};
+
 const wishlistSlice = createSlice({
   name: "wishlist",
   initialState: {
-    items: JSON.parse(localStorage.getItem("wishlist")) || [],
+    items: loadWishlistFromLocalStorage(),
   },
   reducers: {
     addToWishlist: (state, action) => {
@@ -16,9 +26,9 @@ const wishlistSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += action.payload.quantity;
       } else {
-        state.items.push({ ...action.payload, quantity: 1 });
+        state.items.push({ ...action.payload, quantity: action.payload.quantity });
       }
       saveWishlistToLocalStorage(state.items);
     },
@@ -26,8 +36,11 @@ const wishlistSlice = createSlice({
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
-      if (existingItem && existingItem.quantity > 1) {
+      if (existingItem) {
         existingItem.quantity -= 1;
+        if (existingItem.quantity === 0) {
+          state.items = state.items.filter((item) => item.id !== action.payload.id);
+        }
       }
       saveWishlistToLocalStorage(state.items);
     },
