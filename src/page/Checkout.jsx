@@ -98,9 +98,9 @@ const Checkout = () => {
                     <h1 className='text-center text-white text-4xl font-bold font-monrope mt-5'>Checkout</h1>
                 </div>
             </div>
-            <div className="max-w-screen-xl mx-auto px-5 my-10">
-                <div className="flex flex-col xl:flex-row justify-between">
-                    <div className="w-[55%] mx-auto">
+            <div className="max-w-screen-xl mx-auto px-5 mb-20 mt-10">
+                <div className="flex flex-col md:flex-row justify-between">
+                    <div className="md:w-[55%] w-full mx-auto ">
                         {/* Billing Details */}
                         <h1 className="font-monrope font-semibold text-lg">Billing Details</h1>
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 2 }}>
@@ -210,6 +210,7 @@ const Checkout = () => {
                                 <TextField
                                     id="message"
                                     label="Message"
+                                    value={message}
                                     multiline
                                     rows={4}
                                     sx={{ width: '100%', }}
@@ -218,7 +219,7 @@ const Checkout = () => {
                         </div>
                     </div>
                     {/* ***********right side ***********/}
-                    <div className="w-[40%] mt-11 mx-auto">
+                    <div className="md:w-[40%] w-full mt-11 mb-96 mx-auto">
                         <div className='border p-5  h-96'>
                             <Box sx={{ overflow: 'auto', height: '100%' }}>
                                 <Table sx={{ minWidth: 400 }}>

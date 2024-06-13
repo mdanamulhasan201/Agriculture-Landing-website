@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { setBillingDetails } from '../features/billingSlice';
+import { FaArrowRight } from 'react-icons/fa';
 
 const AllCartProducts = () => {
     const cartItems = useSelector(state => state.cart.items);
@@ -156,7 +157,7 @@ const AllCartProducts = () => {
                                 color="secondary"
                                 sx={{ width: { xs: '100%', sm: 'auto', padding: '12px 15px', } }}
                             >
-                                Apply Coupon
+                                Apply Coupon <FaArrowRight className='text-md ms-1' /> 
                             </Button>
                         </Box>
                     </div>
@@ -218,7 +219,7 @@ const AllCartProducts = () => {
                                                     onClick={handleCheckout}
                                                     disabled={subtotal === 0}
                                                 >
-                                                    Proceed To Checkout
+                                                    Proceed To Checkout <FaArrowRight className='text-md ms-1' /> 
                                                 </Button>
                                             </div>
                                         </TableCell>

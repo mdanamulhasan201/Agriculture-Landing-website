@@ -22,6 +22,7 @@ import { addToWishlist, clearWishlist, deleteFromWishlist, removeFromWishlist } 
 import { toast } from 'react-toastify';
 import { TbCurrencyTaka } from 'react-icons/tb';
 import { setBillingDetails } from '../../features/billingSlice';
+import { FaArrowRight } from 'react-icons/fa';
 
 
 const Navbar = () => {
@@ -563,15 +564,16 @@ const Navbar = () => {
                                 color="success"
                                 sx={{ mb: { xs: 2, sm: 0 }, width: { xs: '100%', sm: 'auto' } }}
                             >
-                                View Full Cart
+                               View Full Cart <FaArrowRight className='text-md ms-1' /> 
                             </Button>
                             <Button
                                 variant="contained"
                                 color="secondary"
                                 sx={{ width: { xs: '100%', sm: 'auto' } }}
                                 onClick={handleCheckout}
+                                disabled={subtotal === 0}
                             >
-                                Proceed to Checkout
+                                Proceed to Checkout <FaArrowRight className='text-md ms-1' /> 
                             </Button>
                         </Box>
                     </Box>
