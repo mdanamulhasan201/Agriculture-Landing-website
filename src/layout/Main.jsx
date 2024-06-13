@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/shared/Navbar';
-import Preloader from '../components/Preloade';
 import Footer from '../components/shared/Footer';
-
+import Preloader from '../components/Preloade';
 
 const Main = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -15,8 +14,13 @@ const Main = () => {
         const loadingTimeout = setTimeout(() => {
             setIsLoading(false);
         }, 1000);
+
         return () => clearTimeout(loadingTimeout);
     }, [location]);
+
+    const hideNavbarFooterRoutes = ['/payment-success'];
+
+    const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
 
     return (
         <div>
@@ -24,9 +28,9 @@ const Main = () => {
                 <Preloader />
             ) : (
                 <>
-                    <Navbar />
+                    {!shouldHideNavbarFooter && <Navbar />}
                     <Outlet />
-                    <Footer />
+                    {!shouldHideNavbarFooter && <Footer />}
                 </>
             )}
         </div>

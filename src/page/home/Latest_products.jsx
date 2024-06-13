@@ -33,11 +33,11 @@ const LatestProducts = () => {
         if (existingItem) {
             toast.error(`${product.product_name} is already in the cart!`);
         } else {
-            dispatch(addToCart(product));
+            dispatch(addToCart({ ...product, quantity: 1 })); // Add quantity: 1
             toast.success(`Added ${product.product_name} to cart!`);
         }
     };
-
+    
 
     return (
         <div className="bg-[#E9F1EE]">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Submenu from './Submenu';
 import { IoSearchSharp } from 'react-icons/io5';
 import { BiMenuAltRight } from 'react-icons/bi';
@@ -20,6 +20,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart, deleteFromCart, addAllToCart } from '../../features/cartSlice';
 import { addToWishlist, clearWishlist, deleteFromWishlist, removeFromWishlist } from '../../features/wishlistSlice';
 import { toast } from 'react-toastify';
+import { TbCurrencyTaka } from 'react-icons/tb';
+import { setBillingDetails } from '../../features/billingSlice';
 
 
 const Navbar = () => {
@@ -34,30 +36,50 @@ const Navbar = () => {
     const cartItems = useSelector((state) => state.cart.items);
     const wishlistItems = useSelector((state) => state.wishlist.items);
     const dispatch = useDispatch();
-
-    // **********cart handle************
+    const navigate = useNavigate();
+    const couponDiscount = 10;
+    const shippingCost = 50;
+    // const [couponCode, setCouponCode] = useState('');
+    const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const total = subtotal + shippingCost - couponDiscount;
+    // **********handle Increase Decrease quantity************
     const handleIncrease = (item) => {
-        dispatch(addToCart(item));
+        dispatch(addToCart({ id: item.id, quantity: 1 }));
+        const newQuantity = item.quantity + 1;
+        toast.success(`Quantity increased for ${item.product_name} ${newQuantity}`);
     };
 
     const handleDecrease = (item) => {
-        dispatch(removeFromCart(item));
+        if (item.quantity > 1) {
+            dispatch(removeFromCart(item));
+            const newQuantity = item.quantity - 1;
+            toast.info(`Quantity decreased for ${item.product_name} ${newQuantity}`);
+        } else {
+            toast.warn('Quantity cannot be less than 1');
+        }
     };
 
+    //  *********remove from cart**********
     const handleRemoveFromCart = (id) => {
         dispatch(deleteFromCart({ id }));
         toast.success("Removed  from cart!");
     };
 
-    // **********wishlist handle************
+    // **********wishlist handle Increase Decrease quantity*************
     const handleIncreaseWishlist = (product) => {
-        dispatch(addToWishlist(product));
+        dispatch(addToWishlist({ id: product.id, quantity: 1 }));
+        const newQuantity = product.quantity + 1;
+        toast.success(`Quantity increased for ${product.product_name} ${newQuantity}`);
     };
-
     const handleDecreaseFromWishlist = (product) => {
-        dispatch(removeFromWishlist(product));
+        if (product.quantity > 1) {
+            dispatch(removeFromWishlist(product));
+            const newQuantity = product.quantity - 1;
+            toast.info(`Quantity decreased for ${product.product_name} ${newQuantity}`);
+        } else {
+            toast.warn('Quantity cannot be less than 1');
+        }
     };
-
     const handleRemoveFromWishlist = (id) => {
         dispatch(deleteFromWishlist({ id }));
         toast.success("Removed  from wishlist!");
@@ -73,7 +95,9 @@ const Navbar = () => {
             toast.error('No items found in the wishlist!');
         }
     };
-
+    const handleViewFullCart = () => {
+        navigate('/all-cart-products'); // Navigate to the cart page
+    };
 
     const handleMenuOpen = (event, menu) => {
         if (menu === 'services') {
@@ -129,7 +153,12 @@ const Navbar = () => {
     };
 
     const isActiveLink = (path) => location.pathname === path ? 'text-[#4BAF47] underline underline-offset-4' : '';
-
+    const handleCheckout = () => {
+        const billingDetails = { subtotal, shippingCost, couponDiscount, total };
+        dispatch(setBillingDetails(billingDetails));
+        localStorage.setItem('billingDetails', JSON.stringify(billingDetails));
+        navigate('/checkout');
+    };
     return (
         <div>
             <Submenu />
@@ -381,7 +410,7 @@ const Navbar = () => {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: { xs: '90%', sm: '80%', md: 800 },
+                        width: { xs: '90%', sm: '80%', md: '80%', lg: '60%', xl: '50%', },
                         bgcolor: 'background.paper',
                         boxShadow: 24,
                         p: 4,
@@ -426,7 +455,7 @@ const Navbar = () => {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: { xs: '90%', sm: '80%', md: 800 },
+                        width: { xs: '90%', sm: '80%', md: '80%', lg: '60%', xl: '50%', },
                         bgcolor: 'background.paper',
                         boxShadow: 24,
                         p: 4,
@@ -493,7 +522,12 @@ const Navbar = () => {
                                                         <span className='ms-5 text-md font-semibold'>{item.product_name}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell align="center">${item.price}</TableCell>
+                                                <TableCell align="center">
+                                                    <span className='flex items-center justify-center'>
+
+                                                        <TbCurrencyTaka className='text-xl' /> <span>{item.price}</span>
+                                                    </span>
+                                                </TableCell>
 
                                                 <TableCell align="center">
                                                     <IconButton aria-label="remove" onClick={() => handleDecrease(item)}>
@@ -525,6 +559,7 @@ const Navbar = () => {
                         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', mt: 2 }}>
                             <Button
                                 variant="contained"
+                                onClick={handleViewFullCart}
                                 color="success"
                                 sx={{ mb: { xs: 2, sm: 0 }, width: { xs: '100%', sm: 'auto' } }}
                             >
@@ -534,7 +569,7 @@ const Navbar = () => {
                                 variant="contained"
                                 color="secondary"
                                 sx={{ width: { xs: '100%', sm: 'auto' } }}
-                                onClick={() => console.log('Checkout button clicked')}
+                                onClick={handleCheckout}
                             >
                                 Proceed to Checkout
                             </Button>
@@ -561,7 +596,7 @@ const Navbar = () => {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: { xs: '90%', sm: '80%', md: 800 },
+                        width: { xs: '90%', sm: '80%', md: '80%', lg: '60%', xl: '50%', },
                         bgcolor: 'background.paper',
                         boxShadow: 24,
                         p: 4,
