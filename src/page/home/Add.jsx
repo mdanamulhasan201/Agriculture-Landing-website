@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addToCart } from "../../features/cartSlice";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Add = () => {
     const [discountProducts, setDiscountProducts] = useState([]);
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items);
+    
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -18,7 +20,7 @@ const Add = () => {
                     throw new Error('Failed to fetch products');
                 }
                 const data = await response.json();
-                const filteredProducts = data.filter(product => product.discount === "discount");
+                const filteredProducts = data.filter(product => product.discount === 20); // Filter for 20% discount products
                 setDiscountProducts(filteredProducts);
             } catch (error) {
                 console.error(error);
@@ -27,6 +29,7 @@ const Add = () => {
 
         fetchProducts();
     }, []);
+
     const handleAddToCart = (product) => {
         const discountedPrice = (product.price * 0.8).toFixed(2);
         const existingItem = cartItems.find(item => item.id === product.id);
@@ -37,6 +40,7 @@ const Add = () => {
             toast.success(`Added ${product.product_name} to cart!`);
         }
     };
+
     return (
         <div className="bg-white">
             <div className="max-w-screen-xl mx-auto px-5 sm:px-5 md:px-24 lg:px-20 xl:px-24 2xl:px-0">
@@ -61,14 +65,14 @@ const Add = () => {
                         </div>
                     </div>
 
-                    <div className="">
+                    <div>
                         <div className="flex items-center lg:justify-start justify-center gap-5">
                             <div className="flex items-center gap-3">
                                 <div>
                                     <img className="w-14" src="https://i.ibb.co/hXnwTBs/Item-26-png.png" alt="" />
                                 </div>
                                 <div>
-                                    <h1 className="text-[18px] font-semibold">Money Return </h1>
+                                    <h1 className="text-[18px] font-semibold">Money Return</h1>
                                     <p className="text-[14px] text-gray-500">Back guarantee under 15 days</p>
                                 </div>
                             </div>

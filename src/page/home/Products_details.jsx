@@ -34,7 +34,14 @@ const Products_details = () => {
                 }
                 const data = await response.json();
                 const selectedProduct = data.find(p => p.id === parseInt(id));
-                setProduct(selectedProduct);
+                if (selectedProduct) {
+                    if (selectedProduct.discount) {
+                        selectedProduct.discountedPrice = (selectedProduct.price * 0.8).toFixed(2);
+                    }
+                    setProduct(selectedProduct);
+                } else {
+                    setError('Product not found');
+                }
             } catch (error) {
                 console.error(error);
                 setError(error.message);
@@ -48,20 +55,18 @@ const Products_details = () => {
         setReviews(storedReviews);
     }, [id]);
 
-
     // ****************add to wishlist********
     const handleAddToWishList = (product) => {
         const existingItem = wishlistItems.find(item => item.id === product.id);
         if (existingItem) {
             toast.error(`${product.product_name} is already in the wishlist!`);
         } else {
-            const productWithQuantity = { ...product, quantity };
+            const price = product.discount ? product.discountedPrice : product.price;
+            const productWithQuantity = { ...product,price, quantity };
             dispatch(addToWishlist(productWithQuantity));
             toast.success(`Added ${product.product_name} to wishlist!`);
         }
     };
-
-
 
     // ***************add to cart********
     const handleAddToCart = (product) => {
@@ -69,13 +74,12 @@ const Products_details = () => {
         if (existingItem) {
             toast.error(`${product.product_name} is already in the cart!`);
         } else {
-            const productWithQuantity = { ...product, quantity };
+            const price = product.discount ? product.discountedPrice : product.price;
+            const productWithQuantity = { ...product, price, quantity };
             dispatch(addToCart(productWithQuantity));
             toast.success(`Added ${product.product_name} to cart!`);
         }
     };
-
-
 
     const incrementQuantity = () => {
         setQuantity(prevQuantity => {
@@ -84,6 +88,7 @@ const Products_details = () => {
         });
         toast.success(`Quantity increased to ${quantity + 1}`);
     };
+
     const decrementQuantity = () => {
         if (quantity > 1) {
             setQuantity(prevQuantity => {
@@ -137,8 +142,6 @@ const Products_details = () => {
         }, 2000);
     };
 
-
-
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -178,9 +181,16 @@ const Products_details = () => {
                         className='w-2/3 p-5 md:w-1/3 rounded-lg shadow-slate-400/35 bg-[#f7f4f0] transform transition-transform duration-300 hover:scale-105'
                     />
                     <div className='md:ml-10 mt-5 md:mt-0'>
-                        <div className='flex items-center justify-center md:justify-start gap-5'>
+                       <div className='flex items-center justify-center md:justify-start gap-5'>
                             <h2 className="text-3xl font-bold font-monrope">{product.product_name}</h2>
-                            <p className="mt-2 text-xl  text-[#49A760] flex items-center font-monrope"><TbCurrencyTaka className='text-2xl' />{product.price}</p>
+                            {product.discount ? (
+                                <div className="flex flex-col items-center">
+                                    <p className="text-red-500 line-through flex items-center"><TbCurrencyTaka className='text-2xl' />{product.price}</p>
+                                    <p className="text-[#49A760] flex items-center font-semibold"><TbCurrencyTaka className='text-2xl' />{product.discountedPrice}</p>
+                                </div>
+                            ) : (
+                                <p className="mt-2 text-xl text-[#49A760] flex items-center font-monrope"><TbCurrencyTaka className='text-2xl' />{product.price}</p>
+                            )}
                         </div>
                         <p className='mt-3 text-[#878680] text-[13px] font-monrope text-center md:text-start'>({product.review} Customer Review)</p>
                         <hr className='my-5' />
@@ -204,10 +214,10 @@ const Products_details = () => {
                         </div>
 
                         <div className='flex items-center justify-center md:justify-start  gap-5 mt-6'>
-                            <button onClick={() => handleAddToCart(product)} className='mt-5 border  transform duration-300 hover:text-white  font-semibold text-[14px] font-monrope hover:bg-[#58ce54] px-10 py-4 text-white rounded-lg bg-[#4BAF47]'>
+                            <button onClick={() => handleAddToCart(product)} className='mt-5 border  transform duration-300 hover:text-white  font-semibold text-[14px] font-monrope hover:bg-[#58ce54] px-8 py-3 text-white rounded-lg bg-[#4BAF47]'>
                                 <span className='flex items-center gap-2'><IoCartOutline className='text-2xl' />Add to cart</span>
                             </button>
-                            <button onClick={() => handleAddToWishList(product)} className='mt-5 border  transform duration-300 hover:text-white  font-semibold text-[14px] font-monrope hover:bg-[#eec144dc] px-10 py-4 text-white rounded-lg bg-[#EEC044]'>
+                            <button onClick={() => handleAddToWishList(product)} className='mt-5 border  transform duration-300 hover:text-white  font-semibold text-[14px] font-monrope hover:bg-[#eec144dc] px-8 py-3 text-white rounded-lg bg-[#EEC044]'>
                                 <span className='flex items-center gap-2'><IoMdHeartEmpty className='text-2xl' />Add to wishlist</span>
                             </button>
                         </div>
