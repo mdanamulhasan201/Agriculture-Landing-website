@@ -10,12 +10,13 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import Our_service from './home/Our_service';
 import Farming from './home/Farming';
 import Latest_products from './home/Latest_products';
-import { FaArrowRight } from 'react-icons/fa';
 import { Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './style.css';
-
+import { HiArrowNarrowRight } from "react-icons/hi";
+import Banners from './home/Banners';
+import Add from './home/Add';
 const images = [
     {
         url: 'https://i.ibb.co/tJgWT94/bg.png',
@@ -87,7 +88,7 @@ const Home = () => {
                         style={{ backgroundImage: `url(${currentImage.url})` }}
                     >
                         <div className="flex items-center justify-center min-h-screen text-white">
-                            <div className='w-full max-w-screen-xl mx-auto px-4 lg:px-8'>
+                            <div className='w-full max-w-screen-xl mx-auto px-5 sm:px-5 md:px-24 lg:px-20 xl:px-24 2xl:px-0'>
                                 <div className="text-animation-container">
                                     <motion.div
                                         className='text-sm md:text-base lg:text-lg font-light uppercase'
@@ -102,13 +103,13 @@ const Home = () => {
                                             ))}
                                         </h1>
                                         {currentImage.title2 && (
-                                            <h1 className='text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
+                                            <h1 className='text-5xl md:text-5xl lg:text-7xl font-bold leading-tight mt-2' style={{ fontFamily: "'Covered By Your Grace', cursive" }}>
                                                 {currentImage.title2.split(' ').map((word, index) => (
                                                     index === 1 ? <span key={index} className='text-[#EEC044]'>{word} </span> : `${word} `
                                                 ))}
                                             </h1>
                                         )}
-                                        <p className='mt-5 text-gray-300'>
+                                        <p className='mt-5 text-sm  text-gray-300'>
                                             {textChunks.map((chunk, index) => (
                                                 <React.Fragment key={index}>
                                                     {chunk}<br />
@@ -118,7 +119,7 @@ const Home = () => {
                                         <div className='mt-10 flex items-center gap-6'>
                                             <Button
                                                 variant="contained"
-                                                endIcon={<FaArrowRight />}
+                                                endIcon={<HiArrowNarrowRight />}
                                                 color="success"
                                                 sx={{
                                                     padding: '12px 15px', borderRadius: '5px', backgroundColor: '#4BAF47', color: 'white', '&:hover': { backgroundColor: '#6cd469' }
@@ -146,7 +147,7 @@ const Home = () => {
                 </AnimatePresence>
 
             </div>
-            <div className='max-w-screen-xl mx-auto px-5'>
+            <div className='max-w-screen-xl mx-auto px-5 sm:px-5 md:px-24 lg:px-20 xl:px-24 2xl:px-0'>
                 {/* section card */}
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-between gap-5 mt-[-40px] z-10'>
                     <div className='bg-white shadow-lg flex flex-col items-center gap-3 py-2 px-10 rounded-lg shadow-gray-400 hover:bg-green-100 transform duration-300 group'>
@@ -167,31 +168,31 @@ const Home = () => {
                 </div>
 
                 {/*  section two */}
-                <div className='grid grid-cols-1 md:grid-cols-2 justify-between mt-28 px-5'>
-                    <div className="relative">
-                        <img className="w-[350px] transform transition-transform duration-300 hover:scale-105" src={sectionImg} alt="Main" />
-                        <div className="absolute left-0 top-0 mt-[200px] ml-[-10px] md:mt-[260px] md:ml-[-40px] z-10">
+                <div className='grid grid-cols-1 gap-5 md:grid-cols-2 justify-between mt-28 px-5'>
+                    <div className="relative 2xl:ms-10 ms-0">
+                        <img className="w-[340px] transform transition-transform duration-300 hover:scale-105" src={sectionImg} alt="Main" />
+                        <div className="absolute left-0 top-0 mt-[200px] ml-[-10px] md:mt-[200px] md:ml-[-40px] z-10">
                             <img className="w-[150px] md:w-[200px] transform transition-transform duration-300 hover:scale-105" src={sectionImg2} alt="Overlay" />
                         </div>
                     </div>
 
                     <div className='pt-36 md:pt-0 lg:pt-0 xl:pt-0'>
-                        <h5 style={{ fontFamily: "'Covered By Your Grace', cursive" }} className='text-[#EEC044]'>Our Introductions</h5>
-                        <h1 className='text-5xl font-semibold mt-2'>Agriculture & Organic
+                        <h5 style={{ fontFamily: "'Covered By Your Grace', cursive" }} className='text-[#EEC044] text-2xl'>Our Introductions</h5>
+                        <h1 className='text-5xl sm:text-xl md:text-2xl lg:text-4xl xl:text-4xl 2xl:text-[43px] font-semibold mt-2'>Agriculture & Organic
                             Product Farm</h1>
-                        <h3 className='font-semibold text-lg text-[#4BAF47] my-5'>Agrios is the largest global organic farm.</h3>
-                        <p className='text-[#878680]'>There are many variations of passages of lorem ipsum available but the
+                        <h3 className='font-semibold text-[16px] md:text-[15px] whitespace-nowrap lg:text-[16px] text-[#4BAF47] my-5'>Agrios is the largest global organic farm.</h3>
+                        <p className='text-[#878680] text-[14px]'>There are many variations of passages of lorem ipsum available but the
                             majority have suffered alteration in some form by injected humor or
                             random word which don’t look even.</p>
-                        <div className='flex flex-col sm:flex-row my-5 items-center gap-10 w-[100%] justify-between '>
+                        <div className='flex flex-col sm:flex-row my-5 items-center gap-14 w-[100%] justify-between'>
                             <div className='flex items-center gap-3'>
-                                <img className='w-20' src="https://i.ibb.co/4tCJK40/Icon.png" alt="" />
-                                <p className='text-lg font-semibold'>Growing fruits <br />
+                                <img className='w-14 sm:w-14 md:w-12 lg:w-16 xl:w-16 2xl:w-16' src="https://i.ibb.co/4tCJK40/Icon.png" alt="" />
+                                <p className='text-lg sm:text-[16px] md:text-[14px] lg:text-[16px] 2xl:text-[16px] font-semibold whitespace-nowrap '>Growing fruits <br />
                                     vegetables</p>
                             </div>
                             <div className='flex items-center gap-3'>
-                                <img className='w-20' src="https://i.ibb.co/VHM1T9L/dsaf.png" alt="" />
-                                <p className='text-lg font-semibold'>Tips for ripening <br />
+                                <img className='w-14 sm:w-14 md:w-12 lg:w-16 xl:w-16 2xl:w-16' src="https://i.ibb.co/VHM1T9L/dsaf.png" alt="" />
+                                <p className='text-lg sm:text-[16px] whitespace-nowrap md:text-[14px] lg:text-[16px] 2xl:text-[16px]  font-semibold'>Tips for ripening <br />
                                     your fruits</p>
                             </div>
                         </div>
@@ -207,13 +208,18 @@ const Home = () => {
                             </p>
 
                         </div>
-                        <button className='px-8 py-3 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300'>Discover more</button>
+                        <button className='px-7 hover:scale-105  py-3 flex items-center gap-1 text-white bg-[#4BAF47] mb-8 rounded hover:bg-[#6cd469] transform duration-300'>Discover more
+
+                            <HiArrowNarrowRight className='text-lg' />
+                        </button>
                     </div>
                 </div>
             </div>
             <Our_service />
-            <Farming />
+            {/* <Farming /> */}
+            <Banners/>
             <Latest_products />
+            <Add/>
         </div>
     );
 };

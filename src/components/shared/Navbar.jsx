@@ -164,10 +164,10 @@ const Navbar = () => {
         <div>
             <Submenu />
             <nav style={navbarStyle} className={`custom-navbar w-full ${isScrolled ? 'fixed top-0 z-50 shadow-lg ' : 'absolute'}`}>
-                <div className="max-w-screen-xl mx-auto px-5">
+                <div className="max-w-screen-xl mx-auto  px-5 sm:px-5 md:px-24 lg:px-10 xl:px-24 2xl:px-0">
                     <div className="flex items-center justify-between md:py-4 py-5">
                         <div className="flex items-center justify-between">
-                            <div className="hidden lg:flex xl:space-x-7 md:space-x-4">
+                            <div className="hidden lg:flex space-x-2">
                                 <NavLink
                                     to='/'
                                     exact

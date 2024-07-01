@@ -36,7 +36,7 @@ const Footer = () => {
     return (
         <>
             <div className="bg-[#24231D] w-full">
-                <div className="max-w-screen-xl mx-auto px-5 py-14">
+                <div className="max-w-screen-xl mx-auto px-5 sm:px-5 md:px-24 lg:px-20 xl:px-24 2xl:px-0 py-14">
                     <div className="w-full">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5">
                             {/* **********Logo sections*************/}
@@ -47,24 +47,28 @@ const Footer = () => {
                                     of lorem ipsum available, but the
                                     majority suffered.
                                 </p>
-                                <div className='flex items-center gap-7 text-white mt-5'>
-                                    <div className="flex justify-center items-center bg-[#1F1E17] rounded-full w-10 h-10 ">
-                                        <FaFacebookF className="text-white text-xl transform transition duration-300 hover:scale-110" />
-                                    </div>
-                                    <div className="flex justify-center items-center bg-[#1F1E17] rounded-full w-10 h-10 ">
-                                        <FaInstagram className="text-white text-xl transform transition duration-300 hover:scale-110" />
-                                    </div>
-                                    <div className="flex justify-center items-center bg-[#1F1E17] rounded-full w-10 h-10 ">
-                                        <FaTwitter className="text-white text-xl transform transition duration-300 hover:scale-110" />
-                                    </div>
-                                    <div className="flex justify-center items-center bg-[#1F1E17] rounded-full w-10 h-10 ">
-                                        <FaPinterest className="text-white text-xl transform transition duration-300 hover:scale-110" />
+                                <div className="mt-4">
+                                    <p className="text-gray-400 mb-2">Follow us:</p>
+                                    <div className='flex items-center gap-2 text-white'>
+
+                                        <div className="flex justify-center items-center bg-[#1F1E17] rounded-full w-10 h-10 ">
+                                            <FaFacebookF className="text-white text-xl transform transition duration-300 hover:scale-110" />
+                                        </div>
+                                        <div className="flex justify-center items-center bg-[#1F1E17] rounded-full w-10 h-10 ">
+                                            <FaInstagram className="text-white text-xl transform transition duration-300 hover:scale-110" />
+                                        </div>
+                                        <div className="flex justify-center items-center bg-[#1F1E17] rounded-full w-10 h-10 ">
+                                            <FaTwitter className="text-white text-xl transform transition duration-300 hover:scale-110" />
+                                        </div>
+                                        <div className="flex justify-center items-center bg-[#1F1E17] rounded-full w-10 h-10 ">
+                                            <FaPinterest className="text-white text-xl transform transition duration-300 hover:scale-110" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             {/* ***********Explore**********/}
                             <div>
-                                <h1 className="text-white text-xl font-semibold font-monrope mt-2">Explore</h1>
+                                <h1 className="text-white text-xl font-semibold  mt-2">Explore</h1>
                                 <img className="w-60" src="https://i.ibb.co/gRQ5QMt/div-elementor-element.png" alt="" />
                                 <div className="">
                                     <ul className="flex gap-10">
@@ -72,25 +76,25 @@ const Footer = () => {
                                             <Link to='/about' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
-                                                    <span className="text-md hover:text-[#EEC044] transform duration-300 font-monrope text-gray-400 ">About</span>
+                                                    <span className="text-md hover:text-[#EEC044] transform duration-300  text-gray-400 ">About</span>
                                                 </li>
                                             </Link>
                                             <Link to='/services' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
-                                                    <span className="text-md hover:text-[#EEC044] transform duration-300  font-monrope text-gray-400 ">Services</span>
+                                                    <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">Services</span>
                                                 </li>
                                             </Link>
                                             <Link to='/products' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
-                                                    <span className="text-md hover:text-[#EEC044] transform duration-300  font-monrope text-gray-400 ">Products</span>
+                                                    <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">Products</span>
                                                 </li>
                                             </Link>
                                             <Link to='/shop' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
-                                                    <span className="text-md hover:text-[#EEC044] transform duration-300  font-monrope text-gray-400 ">Shop</span>
+                                                    <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">Shop</span>
                                                 </li>
                                             </Link>
                                         </div>
@@ -98,19 +102,19 @@ const Footer = () => {
                                             <Link to='/careers' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
-                                                    <span className="text-md hover:text-[#EEC044] transform duration-300  font-monrope text-gray-400 ">Careers</span>
+                                                    <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">Careers</span>
                                                 </li>
                                             </Link>
                                             <Link to='/news' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
-                                                    <span className="text-md hover:text-[#EEC044] transform duration-300  font-monrope text-gray-400 ">News</span>
+                                                    <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">News</span>
                                                 </li>
                                             </Link>
                                             <Link to='/contact' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
-                                                    <span className="text-md hover:text-[#EEC044] transform duration-300  font-monrope text-gray-400 ">Contact</span>
+                                                    <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">Contact</span>
                                                 </li>
                                             </Link>
                                         </div>
@@ -120,21 +124,21 @@ const Footer = () => {
                             </div>
                             {/* ***********Contacts**************/}
                             <div>
-                                <h1 className="text-white text-xl font-semibold font-monrope mt-2">Contacts</h1>
+                                <h1 className="text-white text-xl font-semibold  mt-2">Contacts</h1>
                                 <img className="w-60" src="https://i.ibb.co/gRQ5QMt/div-elementor-element.png" alt="" />
                                 <div className="flex flex-col gap-4">
                                     <div>
-                                        <p className="flex items-center gap-2 text-md font-monrope text-gray-400">
+                                        <p className="flex items-center gap-2 text-md  text-gray-400">
                                             <IoMdTime className="text-xl text-[#EEC044]" /> <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
                                         </p>
                                     </div>
                                     <div>
-                                        <p className="flex items-center gap-2 text-md font-monrope text-gray-400">
+                                        <p className="flex items-center gap-2 text-md  text-gray-400">
                                             <IoLocationOutline className="text-xl text-[#EEC044]" /> <span>Mirpur-1 Dhaka, Bangladesh</span>
                                         </p>
                                     </div>
                                     <div>
-                                        <p className="flex items-center gap-2 text-md font-monrope text-gray-400">
+                                        <p className="flex items-center gap-2 text-md  text-gray-400">
                                             <IoCallOutline className="text-xl text-[#EEC044]" />
                                             <a href="tel:+8801777577371" className="text-gray-400 hover:text-[#EEC044]">
                                                 +8801777577371
@@ -142,7 +146,7 @@ const Footer = () => {
                                         </p>
                                     </div>
                                     <div>
-                                        <p className="flex items-center gap-2 text-md font-monrope text-gray-400">
+                                        <p className="flex items-center gap-2 text-md  text-gray-400">
                                             <MdMailOutline className="text-xl text-[#EEC044]" />
                                             <a href="mailto:support@agrios.com" className="text-gray-400 hover:text-[#EEC044]">
                                                 support@agrios.com
@@ -153,7 +157,7 @@ const Footer = () => {
                             </div>
                             {/* **********Newsletter***********/}
                             <div>
-                                <h1 className="text-white text-xl font-semibold font-monrope mt-2 self-start">Newsletter</h1>
+                                <h1 className="text-white text-xl font-semibold  mt-2 self-start">Newsletter</h1>
                                 <img className="w-60" src="https://i.ibb.co/gRQ5QMt/div-elementor-element.png" alt="" />
                                 <form className="" onSubmit={handleSubmit(onSubmit)}>
                                     <input
@@ -165,7 +169,7 @@ const Footer = () => {
                                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                                     <button
                                         type="submit"
-                                        className="mt-5 flex items-center justify-center gap-2 w-full p-3 bg-[#EEC044] font-monrope text-white rounded-md hover:bg-[#4BAF47] transform duration-300"
+                                        className="mt-5 flex items-center justify-center gap-2 w-full p-3 hover:bg-[#EEC044]  text-white rounded-md bg-[#4BAF47] transform duration-300"
                                         disabled={isLoading}
                                     >
                                         {isLoading ? (
