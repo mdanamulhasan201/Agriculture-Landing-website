@@ -11,7 +11,7 @@ const Add = () => {
     const [discountProducts, setDiscountProducts] = useState([]);
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items);
-    
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -87,11 +87,11 @@ const Add = () => {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-5 sm:gap-5 md:gap-10 lg:gap-10 xl:gap-5 2xl:gap-4 items-center justify-center justify-items-center mt-10">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-5 sm:gap-5 md:gap-10 lg:gap-10 xl:gap-5 2xl:gap-4 items-center justify-center justify-items-center mt-10">
                             {discountProducts.slice(0, 3).map(product => {
                                 const discountedPrice = (product.price * 0.8).toFixed(2);
                                 return (
-                                    <div key={product.id} className="bg-white hover:bg-slate-100 transform duration-300 hover:scale-105 shadow-slate-500/25 rounded-lg shadow py-8 sm:py-8 md:py-5 lg:py-7 xl:py-8 2xl:py-8 w-60 sm:w-60 md:w-[200px] lg:w-[220px] xl:w-60 2xl:w-60 cursor-pointer">
+                                    <div key={product.id} className="bg-white hover:bg-slate-100 transform duration-300 hover:scale-105 shadow-slate-500/25 rounded-lg shadow py-8 sm:py-8 md:py-5 lg:py-7 xl:py-8 2xl:py-8 w-60 sm:w-60 md:w-[200px] lg:w-[200px] xl:w-60 2xl:w-60 cursor-pointer">
                                         <Link to={{
                                             pathname: `product-details/${product.id}`,
                                             state: { discountedPrice: discountedPrice }

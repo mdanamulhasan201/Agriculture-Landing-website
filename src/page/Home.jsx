@@ -17,6 +17,7 @@ import './style.css';
 import { HiArrowNarrowRight } from "react-icons/hi";
 import Banners from './home/Banners';
 import Add from './home/Add';
+import WhyChooseUs from './home/WhyChooseUs';
 const images = [
     {
         url: 'https://i.ibb.co/tJgWT94/bg.png',
@@ -217,9 +218,10 @@ const Home = () => {
             </div>
             <Our_service />
             {/* <Farming /> */}
-            <Banners/>
+            <Banners />
             <Latest_products />
-            <Add/>
+            <Add />
+            <WhyChooseUs />
         </div>
     );
 };
