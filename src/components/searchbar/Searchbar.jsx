@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import MenuItem from '@mui/material/MenuItem';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',

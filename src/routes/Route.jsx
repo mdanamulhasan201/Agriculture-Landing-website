@@ -11,6 +11,7 @@ import Checkout from "../page/Checkout";
 import PaymentSuccess from "../page/PaymentSuccess";
 import NewsDetails from "../page/home/NewsDetails";
 import Shop from "../page/shop/Shop";
+import Contact from "../page/contact/Contact";
 
 
 export const router = createBrowserRouter([
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+            {
+                path: "shop",
+                element: <Shop />
             },
             {
                 path: "shop/product-details/:id",
@@ -51,9 +56,10 @@ export const router = createBrowserRouter([
                 element: <NewsDetails />,
             },
             {
-                path: "shop",
-                element: <Shop />
-            },
+                path: "contact",
+                element: <Contact />
+            }
+
         ],
     },
 ]);
