@@ -1,0 +1,28 @@
+{
+  "category": [
+    {
+      "id": 1,
+      "name": "Agriculture"
+    },
+    {
+      "id": 2,
+      "name": "Organic Food"
+    },
+    {
+      "id": 3,
+      "name": "Farming"
+    },
+    {
+      "id": 4,
+      "name": "Fresh Vegetables"
+    },
+    {
+      "id": 5,
+      "name": "Harvest"
+    },
+    {
+      "id": 6,
+      "name": "Farm"
+    }
+  ]
+}
