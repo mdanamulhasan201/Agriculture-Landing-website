@@ -10,6 +10,7 @@ import AllCartProducts from "../page/AllCartProducts";
 import Checkout from "../page/Checkout";
 import PaymentSuccess from "../page/PaymentSuccess";
 import NewsDetails from "../page/home/NewsDetails";
+import Shop from "../page/shop/Shop";
 
 
 export const router = createBrowserRouter([
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "product-details/:id",
+                path: "shop/product-details/:id",
                 element: <Products_details />,
             },
             {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
             {
                 path: "news",
                 element: <NewsDetails />,
+            },
+            {
+                path: "shop",
+                element: <Shop />
             },
         ],
     },

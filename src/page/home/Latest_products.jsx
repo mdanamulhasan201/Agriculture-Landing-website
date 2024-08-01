@@ -52,7 +52,7 @@ const LatestProducts = () => {
                         const discountedPrice = product.discount ? (product.price * 0.8).toFixed(2) : null;
                         return (
                             <div key={product.id} className="bg-white hover:bg-slate-100 transform duration-300 hover:scale-105 shadow-slate-500/25 rounded-lg shadow py-8 sm:py-8 md:py-5 lg:py-7 xl:py-8 2xl:py-8 w-60 sm:w-60 md:w-[200px] lg:w-[220px] xl:w-60 2xl:w-60 cursor-pointer">
-                                <Link to={`product-details/${product.id}`}>
+                                <Link to={`shop/product-details/${product.id}`}>
                                     <div className='flex justify-center'>
                                         <img className='w-40 md:w-36 hover:scale-105 transform transition-transform duration-300' src={product.image} alt="" />
                                     </div>
