@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Bringing Food Production Back To Cities",
+    "content": "Lorem ipsum dolor sit amet, cibo mundi ea duo, vim exerci phaedrum. There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some injected or words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrang hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.",
+    "postBy": "Admin",
+    "date": "30 July 2024",
+    "comment": 10,
+    "tag": "Agriculture, Farming",
+    "category": "Agriculture",
+    "image": "https://i.ibb.co/TkScpj3/news2.png"
+  },
+  {
+    "id": 2,
+    "title": "The Future of Farming, Smart Irrigation Solutions",
+    "content": "Lorem ipsum dolor sit amet, cibo mundi ea duo, vim exerci phaedrum. There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some injected or words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrang hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.",
+    "postBy": "Admin",
+    "date": "28 July 2024",
+    "comment": 25,
+    "tag": "Harvest, Organic,",
+    "category": "Farming",
+    "image": "https://i.ibb.co/1XpxLFB/news1.png"
+  },
+
+  {
+    "id": 4,
+    "title": "We grow products with the organic farming",
+    "content": "Lorem ipsum dolor sit amet, cibo mundi ea duo, vim exerci phaedrum. There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some injected or words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrang hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.",
+    "postBy": "Admin",
+    "date": "24 July 2024",
+    "comment": 20,
+    "tag": "Harvest",
+    "category": "Agriculture",
+    "image": "https://i.ibb.co/KytvpFK/news4.png"
+  },
+  {
+    "id": 3,
+    "title": "Agronomy and relation to Other Sciences",
+    "content": "Lorem ipsum dolor sit amet, cibo mundi ea duo, vim exerci phaedrum. There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some injected or words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrang hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.",
+    "postBy": "Admin",
+    "date": "26 July 2024",
+    "comment": 15,
+    "tag": "Organic, Vegetables",
+    "category": "Farming",
+    "image": "https://i.ibb.co/wJp01Q9/news3.png"
+  }
+]

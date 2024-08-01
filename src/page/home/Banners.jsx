@@ -21,8 +21,8 @@ const Banners = () => {
                             <div className='w-[90px]'>
 
                                 <CircularProgressbar
-                                    value={66} // Set your desired progress value here
-                                    text={`${66}%`}
+                                    value={80} // Set your desired progress value here
+                                    text={`${80}%`}
                                     styles={buildStyles({
                                         textColor: '#F7C35F',
                                         pathColor: '#fff',

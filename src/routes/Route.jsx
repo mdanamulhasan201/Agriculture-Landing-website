@@ -9,6 +9,7 @@ import Service_details from "../page/home/Service_details";
 import AllCartProducts from "../page/AllCartProducts";
 import Checkout from "../page/Checkout";
 import PaymentSuccess from "../page/PaymentSuccess";
+import NewsDetails from "../page/home/NewsDetails";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
             {
                 path: "service-details/:id",
                 element: <Service_details />,
+            },
+            {
+                path: "news",
+                element: <NewsDetails />,
             },
         ],
     },

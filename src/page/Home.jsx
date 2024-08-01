@@ -18,6 +18,7 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 import Banners from './home/Banners';
 import Add from './home/Add';
 import WhyChooseUs from './home/WhyChooseUs';
+import LatestNews from './home/LatestNews';
 const images = [
     {
         url: 'https://i.ibb.co/tJgWT94/bg.png',
@@ -222,6 +223,7 @@ const Home = () => {
             <Latest_products />
             <Add />
             <WhyChooseUs />
+            <LatestNews />
         </div>
     );
 };
