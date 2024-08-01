@@ -12,7 +12,7 @@ import bg from '../../assets/contact/div.elementor-widget-wrap.png';
 
 const Contact = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         setIsLoading(true);
@@ -20,7 +20,7 @@ const Contact = () => {
         setTimeout(() => {
             setIsLoading(false);
             toast.success('Message sent successfully!');
-            // Handle form submission here
+            reset();
         }, 2000);
     };
 
@@ -68,7 +68,7 @@ const Contact = () => {
                 {/* message section */}
                 <div className="flex flex-col items-center md:flex-row my-10 ">
                     {/* leaflet map */}
-                    <div className="w-full md:w-6/12">
+                    <div className="w-full md:w-6/12 -z-50">
                         <MapContainer center={[23.8103, 90.4125]} zoom={12} style={{ height: "528px", width: "100%" }}>
                             <TileLayer
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
