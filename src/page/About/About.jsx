@@ -2,6 +2,7 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 import { IoIosCheckmarkCircle, IoMdHome } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Testimonials from "./Testimonials";
+import MeetFramers from "./MeetFramers";
 
 
 const About = () => {
@@ -89,6 +90,9 @@ const About = () => {
             </div>
             {/* Testimonials */}
             <Testimonials />
+            {/* Farmers */}
+            <MeetFramers />
+
         </div>
     );
 };
