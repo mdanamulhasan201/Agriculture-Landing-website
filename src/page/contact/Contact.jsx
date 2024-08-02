@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { IoMdHome, IoMdPaperPlane } from 'react-icons/io';
 import { Link } from 'react-router-dom';
-import { TextField, Button } from '@mui/material';
+import { TextField } from '@mui/material';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { FaSpinner } from 'react-icons/fa';
@@ -16,7 +16,6 @@ const Contact = () => {
 
     const onSubmit = (data) => {
         setIsLoading(true);
-        // Simulate a network request
         setTimeout(() => {
             setIsLoading(false);
             toast.success('Message sent successfully!');
@@ -40,7 +39,7 @@ const Contact = () => {
             {/* banner */}
             <div style={divStyle}>
                 <div>
-                    <h1 className='text-center text-white text-4xl font-bold font-monrope mt-5'>Our Blog</h1>
+                    <h1 className='text-center text-white text-4xl font-bold font-monrope mt-5'>Contact</h1>
                     <p className="text-center text-white opacity-75 mt-2 flex justify-center items-center">
                         <Link className='hover:text-[#4BAF47] transform duration-300' to='/'>
                             <span className='flex items-center gap-1'><IoMdHome />
