@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  
   "scripts": {
     "dev": "vite",
     "start": "node index.js",
@@ -33,7 +32,6 @@
     "react-detect-offline": "^2.4.5",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.5",
-    "react-horizontal-timeline": "^1.5.3",
     "react-icons": "^5.1.0",
     "react-leaflet": "^4.2.1",
     "react-loader-spinner": "^6.1.6",
