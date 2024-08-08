@@ -181,7 +181,7 @@ const Navbar = () => {
                                 >
                                     About
                                 </NavLink>
-                                <div>
+                                {/* <div>
                                     <button
                                         className="flex gap-1px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300  space-x-1"
                                         onClick={(event) => handleMenuOpen(event, 'services')}
@@ -217,13 +217,13 @@ const Navbar = () => {
                                             </NavLink>
                                         </MenuItem>
                                     </Menu>
-                                </div>
+                                </div> */}
                                 <div>
                                     <button
                                         className="px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 flex gap-1"
                                         onClick={(event) => handleMenuOpen(event, 'products')}
                                     >
-                                        <span>Products</span>
+                                        <span>Projects</span>
                                         {anchorElProducts ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
                                     </button>
                                     <Menu
@@ -233,45 +233,25 @@ const Navbar = () => {
                                         PaperProps={{
                                             style: {
                                                 width: '200px',
-                                                height: '300px',
+                                                height: '150px',
                                                 borderTop: '10px solid #EEC044',
                                             },
                                         }}
                                     >
                                         {/* Menu Items for Products */}
                                         <MenuItem onClick={() => handleMenuClose('products')} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/products' className="text-base font-medium">
-                                                Products
+                                            <NavLink to='/projects' className="text-base font-medium">
+                                            Projects
                                             </NavLink>
                                         </MenuItem>
                                         <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Products 1
+                                            <NavLink to='/projects' className="text-base font-medium">
+                                            projects 2
                                             </NavLink>
                                         </MenuItem>
                                         <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Products 1
-                                            </NavLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Products 1
-                                            </NavLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Products 1
-                                            </NavLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Products 1
-                                            </NavLink>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleMenuClose} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                                            <NavLink to='/services/details' className="text-base font-medium">
-                                                Products 1
+                                            <NavLink to='/projects' className="text-base font-medium">
+                                            projects 3
                                             </NavLink>
                                         </MenuItem>
                                     </Menu>
@@ -342,7 +322,7 @@ const Navbar = () => {
                     <div className="px-2 pt-2 pb-3 space-y-1 text-center">
                         <NavLink to='/' exact className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/')}`}>Home</NavLink>
                         <NavLink to='/about' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/about')}`}>About</NavLink>
-                        <div className='flex justify-center'>
+                        {/* <div className='flex justify-center'>
                             <button
                                 className="block px-3 py-2 rounded-md text-base font-medium hover:text-[#4BAF47] hover:underline hover:underline-offset-4 duration-300 space-x-1"
                                 onClick={(event) => handleMenuOpen(event, 'services')}
@@ -362,7 +342,7 @@ const Navbar = () => {
                                     },
                                 }}
                             >
-                                {/* Menu Items for Services */}
+                            
                                 <MenuItem onClick={() => handleMenuClose('services')} style={{ borderBottom: '1px solid #e0e0e0' }}>
                                     <NavLink to='/services' className="text-base font-medium">
                                         Services
@@ -379,8 +359,8 @@ const Navbar = () => {
                                     </NavLink>
                                 </MenuItem>
                             </Menu>
-                        </div>
-                        <NavLink to='/products' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/products')}`}>  Products
+                        </div> */}
+                        <NavLink to='/projects' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/projects')}`}>  Products
                         </NavLink>
                         <NavLink to='/news' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/news')}`}>News</NavLink>
                         <NavLink to='/shop' className={`block px-3 py-2 rounded-md text-base font-medium ${isActiveLink('/shop')}`}>Shop</NavLink>

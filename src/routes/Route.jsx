@@ -12,6 +12,7 @@ import NewsDetails from "../page/home/NewsDetails";
 import Shop from "../page/shop/Shop";
 import Contact from "../page/contact/Contact";
 import About from "../page/About/About";
+import Projects from "../page/project/Projects";
 
 
 export const router = createBrowserRouter([
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
             {
                 path: "about",
                 element: <About />
+            },
+            {
+                path: "projects",
+                element: <Projects />
             }
 
         ],
