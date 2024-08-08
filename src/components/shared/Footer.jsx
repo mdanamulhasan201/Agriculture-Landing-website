@@ -79,16 +79,16 @@ const Footer = () => {
                                                     <span className="text-md hover:text-[#EEC044] transform duration-300  text-gray-400 ">About</span>
                                                 </li>
                                             </Link>
-                                            <Link to='/services' className="">
+                                            {/* <Link to='/services' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
                                                     <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">Services</span>
                                                 </li>
-                                            </Link>
-                                            <Link to='/products' className="">
+                                            </Link> */}
+                                            <Link to='/projects' className="">
                                                 <li className="flex items-center gap-2 ">
                                                     <img className="w-4" src="https://i.ibb.co/SQYSXfF/Iconfg.png" alt="" />
-                                                    <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">Products</span>
+                                                    <span className="text-md hover:text-[#EEC044] transform duration-300   text-gray-400 ">Projects</span>
                                                 </li>
                                             </Link>
                                             <Link to='/shop' className="">
