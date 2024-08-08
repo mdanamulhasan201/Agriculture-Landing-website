@@ -1,12 +1,9 @@
-import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { IoMdHome } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Pagination from '@mui/material/Pagination';
 
 const Projects = () => {
-    const [projects, setProjects] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 6;
     const divStyle = {
         backgroundImage: `url('https://i.ibb.co/rybD1fm/title.png')`,
         backgroundSize: 'cover',
@@ -18,7 +15,9 @@ const Projects = () => {
         alignItems: 'center',
     };
 
-    // fetch projects data from database
+    const [projects, setProjects] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -35,7 +34,6 @@ const Projects = () => {
         };
 
         fetchProjects();
-
     }, []);
 
     const handleChangePage = (event, value) => {
@@ -45,7 +43,6 @@ const Projects = () => {
     const indexOfLastProject = currentPage * itemsPerPage;
     const indexOfFirstProject = indexOfLastProject - itemsPerPage;
     const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
-
 
     return (
         <div>
@@ -71,18 +68,18 @@ const Projects = () => {
                                     <p className="text-white text-lg font-semibold">{project.title}</p>
                                 </div>
                                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                                    <p className="text-white">Durations: {project.duration}</p>
+                                    <p className="text-white">Duration: {project.duration}</p>
                                 </div>
                             </Link>
                         ))
                     }
                 </div>
                 <div className="flex justify-center mt-5">
-                    <Pagination
-                        count={Math.ceil(projects.length / itemsPerPage)}
-                        page={currentPage}
-                        onChange={handleChangePage}
-                        color="primary"
+                    <Pagination 
+                        count={Math.ceil(projects.length / itemsPerPage)} 
+                        page={currentPage} 
+                        onChange={handleChangePage} 
+                        color="primary" 
                     />
                 </div>
             </div>
