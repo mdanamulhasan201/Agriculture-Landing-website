@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 const LatestNews = () => {
     const [news, setNews] = useState([]);
@@ -30,7 +31,7 @@ const LatestNews = () => {
                 {
                     news.slice(2, 6).map((project) => (
                         <Link key={project.id} to={`/project/${project.id}`} className="group block relative overflow-hidden rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
-                            <img src={project.image} alt={project.title} className="h-96 w-full object-cover" />
+                            <LazyLoadImage effect="blur" src={project.image} alt={project.title} className="h-96 w-full object-cover" />
                             <div className="absolute bottom-10 left-4 z-10">
                                 <p className="text-white text-lg font-semibold">{project.title}</p>
                             </div>

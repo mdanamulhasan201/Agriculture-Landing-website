@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addToCart } from "../../features/cartSlice";
 import 'react-toastify/dist/ReactToastify.css';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Add = () => {
     const [discountProducts, setDiscountProducts] = useState([]);
@@ -54,7 +55,7 @@ const Add = () => {
                         <div className="p-5 my-14 flex flex-col justify-center items-center">
                             <div>
                                 <h1 className="text-white text-3xl uppercase font-semibold text-center">Organic <br /> Fresh Fruit</h1>
-                                <img className="w-52 my-5" src="https://i.ibb.co/NmtWv27/14-png.png" alt="" />
+                                <LazyLoadImage effect="blur" className="w-52 my-5" src="https://i.ibb.co/NmtWv27/14-png.png" alt="" />
                                 <div className="flex flex-col justify-center items-center hover:scale-105 transform duration-300">
                                     <button className="bg-[#EEC044] flex text-[14px] items-center gap-1 hover:bg-[#ffcb3a] transform duration-300 py-2 px-8 rounded font-semibold">
                                         All Products
@@ -69,7 +70,7 @@ const Add = () => {
                         <div className="flex items-center lg:justify-start justify-center gap-5">
                             <div className="flex items-center gap-3">
                                 <div>
-                                    <img className="w-14" src="https://i.ibb.co/hXnwTBs/Item-26-png.png" alt="" />
+                                    <LazyLoadImage effect="blur" className="w-14" src="https://i.ibb.co/hXnwTBs/Item-26-png.png" alt="" />
                                 </div>
                                 <div>
                                     <h1 className="text-[18px] font-semibold">Money Return</h1>
@@ -78,7 +79,7 @@ const Add = () => {
                             </div>
                             <div className="flex items-center gap-3">
                                 <div>
-                                    <img className="w-14" src="https://i.ibb.co/3CgpGGG/Item-27-png.png" alt="" />
+                                    <LazyLoadImage effect="blur" className="w-14" src="https://i.ibb.co/3CgpGGG/Item-27-png.png" alt="" />
                                 </div>
                                 <div>
                                     <h1 className="text-[18px] font-semibold">Member Discount</h1>
@@ -97,7 +98,7 @@ const Add = () => {
                                             state: { discountedPrice: discountedPrice }
                                         }}>
                                             <div className='flex justify-center'>
-                                                <img className='w-40 md:w-36 hover:scale-105 transform transition-transform duration-300' src={product.image} alt="" />
+                                                <LazyLoadImage effect="blur" className='w-40 md:w-36 hover:scale-105 transform transition-transform duration-300' src={product.image} alt="" />
                                             </div>
                                             <p className='text-center text-[12px] font-serif text-[#666666]'>{product.title}</p>
                                             <h2 className="text-md font-semibold text-center font-monrope mt-1">{product.product_name}</h2>

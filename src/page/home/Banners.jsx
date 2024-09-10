@@ -1,14 +1,15 @@
-import React from 'react';
+
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { IoIosCheckboxOutline } from 'react-icons/io';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Banners = () => {
     return (
         <div className='bg-[#4BAF47] '>
             <div className='grid grid-cols-1 sm:grid-cols-2 items-center gap-4'>
                 <div>
-                    <img className='sm:w-[600px] w-full h-[450px]' src="https://i.ibb.co/x8VgFZV/div-shape.png" alt="" />
+                    <LazyLoadImage effect="blur" className='sm:w-[600px] w-full h-[450px] mt-2' src="https://i.ibb.co/x8VgFZV/div-shape.png" alt="" />
                 </div>
 
                 <div className='px-5 py-2'>

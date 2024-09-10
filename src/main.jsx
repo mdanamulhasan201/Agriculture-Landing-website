@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import ScrollToTopButtom from './components/ScrollToTopButtom';
 import { router } from './routes/Route';
 import store from './store/store';
+import 'react-lazy-load-image-component/src/effects/blur.css'; // Optional effect
 // import CheckInternetConnection from './components/CheckInternetConnection';
 
 

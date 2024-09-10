@@ -5,6 +5,7 @@ import { Box, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 import { FaSpinner } from 'react-icons/fa';
 import { IoMdHome, IoMdPaperPlane } from 'react-icons/io';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Service_details = () => {
     const { id } = useParams();
@@ -81,6 +82,7 @@ const Service_details = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+
     };
 
     const services = [
@@ -174,7 +176,7 @@ const Service_details = () => {
                     </div>
                     <div className='md:w-[70%] w-full'>
                         <div>
-                            <img src={product.img1} alt={product.offerName} className="w-full h-[500px]" />
+                            <LazyLoadImage effect="blur" src={product.img1} alt={product.offerName} className="w-full h-[500px]" />
                             <h1 className="text-4xl font-semibold font-monrope mt-5 text-gray-700">{product.offerName}</h1>
                             <div className="mt-5">
                                 <p className='font-roboto leading-7 text-gray-700'>{product.description}</p>
@@ -182,8 +184,8 @@ const Service_details = () => {
                             <h1 className='mt-5 text-2xl font-roboto text-gray-700 mb-5'>The importance of {product.offerName}</h1>
                             <p className='font-roboto leading-7 text-gray-700'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero, eveniet? Assumenda perspiciatis a error nulla, qui earum veniam labore consequuntur quo aut tempora vitae doloribus excepturi ipsa distinctio odio quam et at tenetur cum, porro cumque? Reiciendis animi porro fuga?</p>
                             <div className='grid grid-cols-2 gap-5 my-10'>
-                                <img className='w-full h-[200px]' src={product.img2} alt="" />
-                                <img className='w-full h-[200px]' src={product.img1} alt="" />
+                                <LazyLoadImage effect="blur" className='w-full h-[200px]' src={product.img2} alt="" />
+                                <LazyLoadImage effect="blur" className='w-full h-[200px]' src={product.img1} alt="" />
                             </div>
                         </div>
                     </div>

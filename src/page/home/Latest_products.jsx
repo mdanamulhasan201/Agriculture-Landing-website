@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../features/cartSlice';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const LatestProducts = () => {
     const [products, setProducts] = useState([]);
@@ -54,7 +55,7 @@ const LatestProducts = () => {
                             <div key={product.id} className="bg-white hover:bg-slate-100 transform duration-300 hover:scale-105 shadow-slate-500/25 rounded-lg shadow py-8 sm:py-8 md:py-5 lg:py-7 xl:py-8 2xl:py-8 w-60 sm:w-60 md:w-[200px] lg:w-[220px] xl:w-60 2xl:w-60 cursor-pointer">
                                 <Link to={`shop/product-details/${product.id}`}>
                                     <div className='flex justify-center'>
-                                        <img className='w-40 md:w-36 hover:scale-105 transform transition-transform duration-300' src={product.image} alt="" />
+                                        <LazyLoadImage effect="blur" className='w-40 md:w-36 hover:scale-105 transform transition-transform duration-300' src={product.image} alt="" />
                                     </div>
                                     <p className='text-center text-[12px] font-serif text-[#666666]'>{product.title}</p>
                                     <h2 className="text-md font-semibold text-center font-monrope mt-1">{product.product_name}</h2>

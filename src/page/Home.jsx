@@ -18,6 +18,9 @@ import Banners from './home/Banners';
 import Add from './home/Add';
 import WhyChooseUs from './home/WhyChooseUs';
 import LatestNews from './home/LatestNews';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+
 const images = [
     {
         url: 'https://i.ibb.co/tJgWT94/bg.png',
@@ -154,26 +157,26 @@ const Home = () => {
                     <div className='bg-white shadow-lg flex flex-col items-center gap-3 py-2 px-10 rounded-lg shadow-gray-400 hover:bg-green-100 transform duration-300 group'>
                         <p style={{ fontFamily: "'Covered By Your Grace', cursive" }} className='text-[#EEC044] text-xl'>Feature 01</p>
                         <h1 className='text-lg font-semibold text-center whitespace-nowrap'>We are using a <br /> new technology</h1>
-                        <img className="w-16 transform transition-transform duration-300 group-hover:scale-110" src={cardImge1} alt="" />
+                        <LazyLoadImage effect="blur" className="w-16 transform transition-transform duration-300 group-hover:scale-110" src={cardImge1} alt="" />
                     </div>
                     <div className='bg-white shadow-lg flex flex-col items-center gap-3 py-2 px-10  rounded-lg shadow-gray-400 hover:bg-green-100 transform duration-300 group'>
                         <p style={{ fontFamily: "'Covered By Your Grace', cursive" }} className='text-[#EEC044] text-xl'>Feature 02</p>
                         <h1 className='text-lg font-semibold text-center whitespace-nowrap'>Good in smart <br />organic services</h1>
-                        <img className="w-16 transform transition-transform duration-300 group-hover:scale-110" src={cardImge2} alt="" />
+                        <LazyLoadImage effect="blur" className="w-16 transform transition-transform duration-300 group-hover:scale-110" src={cardImge2} alt="img" />
                     </div>
                     <div className="bg-white shadow-lg flex flex-col items-center gap-3 py-2 px-10 rounded-lg shadow-gray-400 hover:bg-green-100 transform duration-300 group">
                         <p style={{ fontFamily: "'Covered By Your Grace', cursive" }} className="text-[#EEC044] text-xl">Feature 02</p>
                         <h1 className="text-lg font-semibold text-center whitespace-nowrap">Reforming <br /> in the systems</h1>
-                        <img className="w-16 transform transition-transform duration-300 group-hover:scale-110" src={cardImge3} alt="Feature" />
+                        <LazyLoadImage className="w-16 transform transition-transform duration-300 group-hover:scale-110" src={cardImge3} alt="img"  effect="blur" />
                     </div>
                 </div>
 
                 {/*  section two */}
                 <div className='grid grid-cols-1 gap-5 md:grid-cols-2 justify-between mt-28 px-5'>
                     <div className="relative 2xl:ms-10 ms-0">
-                        <img className="w-[340px] transform transition-transform duration-300 hover:scale-105" src={sectionImg} alt="Main" />
+                        <LazyLoadImage effect="blur" className="w-[340px] transform transition-transform duration-300 hover:scale-105" src={sectionImg} alt="Main" />
                         <div className="absolute left-0 top-0 mt-[200px] ml-[-10px] md:mt-[200px] md:ml-[-40px] z-10">
-                            <img className="w-[150px] md:w-[200px] transform transition-transform duration-300 hover:scale-105" src={sectionImg2} alt="Overlay" />
+                            <LazyLoadImage effect="blur" className="w-[150px] md:w-[200px] transform transition-transform duration-300 hover:scale-105" src={sectionImg2} alt="Overlay" />
                         </div>
                     </div>
 
@@ -187,12 +190,12 @@ const Home = () => {
                             random word which don’t look even.</p>
                         <div className='flex flex-col sm:flex-row my-5 items-center gap-14 w-[100%] justify-between'>
                             <div className='flex items-center gap-3'>
-                                <img className='w-14 sm:w-14 md:w-12 lg:w-16 xl:w-16 2xl:w-16' src="https://i.ibb.co/4tCJK40/Icon.png" alt="" />
+                                <LazyLoadImage effect="blur" className='w-14 sm:w-14 md:w-12 lg:w-16 xl:w-16 2xl:w-16' src="https://i.ibb.co/4tCJK40/Icon.png" alt="" />
                                 <p className='text-lg sm:text-[16px] md:text-[14px] lg:text-[16px] 2xl:text-[16px] font-semibold whitespace-nowrap '>Growing fruits <br />
                                     vegetables</p>
                             </div>
                             <div className='flex items-center gap-3'>
-                                <img className='w-14 sm:w-14 md:w-12 lg:w-16 xl:w-16 2xl:w-16' src="https://i.ibb.co/VHM1T9L/dsaf.png" alt="" />
+                                <LazyLoadImage effect="blur" className='w-14 sm:w-14 md:w-12 lg:w-16 xl:w-16 2xl:w-16' src="https://i.ibb.co/VHM1T9L/dsaf.png" alt="" />
                                 <p className='text-lg sm:text-[16px] whitespace-nowrap md:text-[14px] lg:text-[16px] 2xl:text-[16px]  font-semibold'>Tips for ripening <br />
                                     your fruits</p>
                             </div>

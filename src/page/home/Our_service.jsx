@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Our_service = () => {
     const [products, setProducts] = useState([]);
@@ -40,11 +41,11 @@ const Our_service = () => {
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
-                            <img className='h-40 sm:h-40 md:h-40 lg:h-36 xl:h-40 2xl:h-40 w-64' src={product.img1} alt={product.offerName} />
+                            <LazyLoadImage effect='blur' className='h-40 sm:h-40 md:h-40 lg:h-36 xl:h-40 2xl:h-40 w-64' src={product.img1} alt={product.offerName} />
                             <div
                                 className={`absolute top-[150px] left-3/4 transform  -translate-x-1/2 -translate-y-1/2 bg-[${hoveredIndex === index ? '#EEC044' : '#C5CE38'}] w-16 sm:w-16 md:w-16 lg:w-14 xl:w-16 2xl:w-16 h-16 sm:h-16 md:h-16 lg:h-14 xl:h-16 2xl:h-16 rounded-md flex items-center justify-center transition-background-color duration-300`}
                             >
-                                <img src={product.icon} alt={product.offerName} className="w-10" />
+                                <LazyLoadImage effect='blur'  src={product.icon} alt={product.offerName} className="w-10" />
                             </div>
                             <div className='p-5'>
                                 <div className="mt-5">

@@ -2,13 +2,14 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import bg from "../../assets/choseusbg.png";
 import background from "../../assets/bg_choose.png";
 import { HiArrowNarrowRight } from "react-icons/hi";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const WhyChooseUs = () => {
     return (
         <div style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <div className='max-w-screen-xl mx-auto px-5 sm:px-5 md:px-24 lg:px-20 xl:px-24 2xl:px-0 my-5'>
                 <div className='flex flex-col lg:flex-row gap-5'>
                     <div className="lg:order-2 order-1">
-                        <img className="w-[900px] h-[500px] lg:h-[400px]" src={bg} alt="" />
+                        <LazyLoadImage effect="blur" className="w-[900px] h-[500px] lg:h-[400px]" src={bg} alt="" />
                     </div>
                     <div className="lg:order-1 order-2">
                         <div>
